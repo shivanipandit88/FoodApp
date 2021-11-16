@@ -4,6 +4,7 @@ import './App.css';
 import awsconfig from './aws-exports';
 import { withAuthenticator } from '@aws-amplify/ui-react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {HashRouter} from 'react-router-dom';
 import SideNav from './components/SideNav';
 import Restaurant from './views/Restaurant';
 import Menu from './views/Menu';
@@ -61,6 +62,7 @@ function App() {
 
   return (
     <div className="App">
+          <HashRouter basename="/home"/>
           <Router>
             <SideNav />
             <Switch>
