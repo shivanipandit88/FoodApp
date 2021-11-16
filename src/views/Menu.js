@@ -1,6 +1,6 @@
 import { API, Auth } from 'aws-amplify';
 import React, { useState, useEffect } from 'react';
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { Container, Row, Col, Table, Image, Button } from "react-bootstrap";
 import food1 from '../assets/food1.jpg';
 import food2 from '../assets/food2.jpg';
@@ -25,25 +25,25 @@ export default function Menu() {
                                 <td><Image src={food1} alt="Restaurant 1" /></td>
                                 <td>House Pizza <span>Capsicum, Onions, Tomatoes, Corn, Cheese</span></td>
                                 <td>$ 11.00</td>
-                                <td><Button variant="dark">Add to Cart</Button></td>
+                                <td><Link to="/cart" className="btn btn-dark">Add to Cart</Link></td>
                             </tr>
                             <tr>
                                 <td><Image src={food2} alt="Restaurant 2" /></td>
                                 <td>Margherita Pizza <span>Capsicum, Onions, Tomatoes, Corn, Cheese</span></td>
                                 <td>$ 11.00</td>
-                                <td><Button variant="dark">Add to Cart</Button></td>
+                                <td><Link to="/cart" className="btn btn-dark">Add to Cart</Link></td>
                             </tr>
                             <tr>
                                 <td><Image src={food3} alt="Restaurant 3" /></td>
                                 <td>4 Cheese Pizza <span>Capsicum, Onions, Tomatoes, Corn, Cheese</span></td>
                                 <td>$ 11.00</td>
-                                <td><Button variant="dark">Add to Cart</Button></td>
+                                <td><Link to="/cart" className="btn btn-dark">Add to Cart</Link></td>
                             </tr>
                             <tr>
                                 <td><Image src={food4} alt="Restaurant 4" /></td>
                                 <td>Garden Pizza <span>Capsicum, Onions, Tomatoes, Corn, Cheese</span></td>
                                 <td>$ 11.00</td>
-                                <td><Button variant="dark">Add to Cart</Button></td>
+                                <td><Link to="/cart" className="btn btn-dark">Add to Cart</Link></td>
                             </tr>
                         </tbody>
                     </Table>
