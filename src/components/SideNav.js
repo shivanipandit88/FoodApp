@@ -18,6 +18,12 @@ const SideNav = (props) => {
             path: '/cart',
             icon: <FaIcons.FaShoppingCart />,
             cName: 'nav-text'
+        },
+        {
+            title: 'Register Restaurant',
+            path: '/register',
+            icon: <FaIcons.FaEdit />,
+            cName: 'nav-text'
         }
     ];
 

@@ -9,6 +9,7 @@ import SideNav from './components/SideNav';
 import Restaurant from './views/Restaurant';
 import Menu from './views/Menu';
 import Cart from './views/Cart';
+import Register from './views/RegisterRes';
 Amplify.configure(awsconfig);
 
 function App() {
@@ -69,6 +70,7 @@ function App() {
               <Route path='/' exact component={Restaurant} />
               <Route path='/menu' exact component={Menu} />
               <Route path='/cart' exact component={Cart} />
+              <Route path='/register' exact component={Register} />
             </Switch>
           </Router>
       <hr />

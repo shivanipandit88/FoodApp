@@ -1,0 +1,11 @@
+{
+  "AppSyncApiName": "fassos",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authfassos33d8fe4b",
+      "Outputs.UserPoolId"
+    ]
+  }
+}

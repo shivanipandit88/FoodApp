@@ -48,8 +48,9 @@ export default function Menu() {
                         </tbody>
                     </Table>
                     <Row>
-                        <div className="btn">
-                            <Button href="/cart" variant="warning">Go to Cart</Button>
+                        <div className="btns">
+                            <Link to="/" className="btn btn-dark">Back</Link>
+                            <Link to="/cart" className="btn btn-warning">Go to Cart</Link>
                         </div>
                     </Row>
                 </Container>

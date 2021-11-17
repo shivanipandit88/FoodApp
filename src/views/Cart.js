@@ -1,6 +1,6 @@
 import { API, Auth } from 'aws-amplify';
 import React, { useState, useEffect } from 'react';
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { Container, Row, Col, Table, Image, Button } from "react-bootstrap";
 
 
@@ -39,8 +39,9 @@ export default function Menu() {
                     </tbody>
                 </Table>
                 <Row>
-                    <div className="btn">
-                        <Button href="/cart" variant="warning">Place Order</Button>
+                    <div className="btns">
+                        <Link to="/menu" className="btn btn-dark">Back</Link>
+                        <Link to="/cart" className="btn btn-warning">Place Order</Link>
                     </div>
                 </Row>
             </Container>

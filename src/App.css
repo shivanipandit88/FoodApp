@@ -273,7 +273,19 @@ amplify-sign-out{
   margin: 0;
 }
 
-.menu .btn{
+.menu .btns{
   text-align: right;
   margin-top: 30px;
+}
+
+.menu .btns .btn.btn-dark{
+  float: left;
+}
+
+.regForm .form-group{
+  margin-bottom: 20px;
+}
+
+.regForm button:disabled:hover{
+  cursor: not-allowed;
 }
