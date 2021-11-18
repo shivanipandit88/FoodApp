@@ -46,7 +46,7 @@ export default function Menu() {
                     </Table>
                     <Row>
                         <div className="btns">
-                            <Link to="/" className="btn btn-dark">Back</Link>
+                            <Link to="/" className="btn btn-dark">Home</Link>
                             <Link to="/cart" className="btn btn-warning">Go to Cart</Link>
                         </div>
                     </Row>

@@ -11,4 +11,6 @@ type AddMenu @model {
   ingredients: String!
   image: String
   price: Int!
+  dishid: ID!
+  restaurant: Restaurant @connection(fields: ["dishid"])
 }

@@ -45,6 +45,15 @@ export const onCreateAddMenu = /* GraphQL */ `
       ingredients
       image
       price
+      dishid
+      restaurant {
+        id
+        name
+        description
+        image
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -58,6 +67,15 @@ export const onUpdateAddMenu = /* GraphQL */ `
       ingredients
       image
       price
+      dishid
+      restaurant {
+        id
+        name
+        description
+        image
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -71,6 +89,15 @@ export const onDeleteAddMenu = /* GraphQL */ `
       ingredients
       image
       price
+      dishid
+      restaurant {
+        id
+        name
+        description
+        image
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
