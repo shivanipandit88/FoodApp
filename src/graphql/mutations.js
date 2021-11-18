@@ -11,9 +11,6 @@ export const createRestaurant = /* GraphQL */ `
       name
       description
       image
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -29,9 +26,6 @@ export const updateRestaurant = /* GraphQL */ `
       name
       description
       image
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -47,9 +41,6 @@ export const deleteRestaurant = /* GraphQL */ `
       name
       description
       image
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -66,9 +57,6 @@ export const createAddMenu = /* GraphQL */ `
       ingredients
       image
       price
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -85,9 +73,6 @@ export const updateAddMenu = /* GraphQL */ `
       ingredients
       image
       price
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -104,9 +89,6 @@ export const deleteAddMenu = /* GraphQL */ `
       ingredients
       image
       price
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }

@@ -8,7 +8,7 @@ type Restaurant @model {
 type AddMenu @model {
   id: ID!
   dishname: String!
-  ingredients: String
+  ingredients: String!
   image: String
-  price: Int
+  price: Int!
 }

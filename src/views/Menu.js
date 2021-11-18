@@ -7,8 +7,19 @@ import food2 from '../assets/food2.jpg';
 import food3 from '../assets/food3.jpg';
 import food4 from '../assets/food4.jpg';
 import food5 from '../assets/food5.jpg';
+import { listAddMenus } from '../graphql/queries';
 
 export default function Menu() {
+    const [menus, setmenus] = useState([]);
+
+    useEffect(() => {
+        fetchMenus();
+      }, []);
+    
+      async function fetchMenus() {
+        const apiData = await API.graphql({ query: listAddMenus });
+        setmenus(apiData.data.listAddMenus.items);
+      }
 
     return (
         <div>
@@ -21,30 +32,16 @@ export default function Menu() {
                     <h1>Menu</h1>
                     <Table striped bordered hover responsive="sm">
                         <tbody>
-                            <tr>
-                                <td><Image src={food1} alt="Restaurant 1" /></td>
-                                <td>House Pizza <span>Capsicum, Onions, Tomatoes, Corn, Cheese</span></td>
-                                <td>$ 11.00</td>
-                                <td><Link to="/cart" className="btn btn-dark">Add to Cart</Link></td>
-                            </tr>
-                            <tr>
-                                <td><Image src={food2} alt="Restaurant 2" /></td>
-                                <td>Margherita Pizza <span>Capsicum, Onions, Tomatoes, Corn, Cheese</span></td>
-                                <td>$ 11.00</td>
-                                <td><Link to="/cart" className="btn btn-dark">Add to Cart</Link></td>
-                            </tr>
-                            <tr>
-                                <td><Image src={food3} alt="Restaurant 3" /></td>
-                                <td>4 Cheese Pizza <span>Capsicum, Onions, Tomatoes, Corn, Cheese</span></td>
-                                <td>$ 11.00</td>
-                                <td><Link to="/cart" className="btn btn-dark">Add to Cart</Link></td>
-                            </tr>
-                            <tr>
-                                <td><Image src={food4} alt="Restaurant 4" /></td>
-                                <td>Garden Pizza <span>Capsicum, Onions, Tomatoes, Corn, Cheese</span></td>
-                                <td>$ 11.00</td>
-                                <td><Link to="/cart" className="btn btn-dark">Add to Cart</Link></td>
-                            </tr>
+                            {
+                                menus.map(menus => (
+                                <tr>
+                                    <td><Image src={menus.image} alt="Restaurant 1" /></td>
+                                    <td>{menus.dishname} <span>{menus.ingredients}</span></td>
+                                    <td>$ {menus.price}</td>
+                                    <td><Link to="/cart" className="btn btn-dark">Add to Cart</Link></td>
+                                </tr>
+                                ))
+                            }
                         </tbody>
                     </Table>
                     <Row>

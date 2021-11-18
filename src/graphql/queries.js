@@ -1,35 +1,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const syncRestaurants = /* GraphQL */ `
-  query SyncRestaurants(
-    $filter: ModelRestaurantFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncRestaurants(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        name
-        description
-        image
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
 export const getRestaurant = /* GraphQL */ `
   query GetRestaurant($id: ID!) {
     getRestaurant(id: $id) {
@@ -37,9 +8,6 @@ export const getRestaurant = /* GraphQL */ `
       name
       description
       image
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -57,44 +25,10 @@ export const listRestaurants = /* GraphQL */ `
         name
         description
         image
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncAddMenus = /* GraphQL */ `
-  query SyncAddMenus(
-    $filter: ModelAddMenuFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncAddMenus(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        dishname
-        ingredients
-        image
-        price
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -106,9 +40,6 @@ export const getAddMenu = /* GraphQL */ `
       ingredients
       image
       price
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -127,14 +58,10 @@ export const listAddMenus = /* GraphQL */ `
         ingredients
         image
         price
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       nextToken
-      startedAt
     }
   }
 `;

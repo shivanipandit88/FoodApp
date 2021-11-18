@@ -4,9 +4,9 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Image, Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { useFormFields } from "../lib/hooksLib";
-import { createRestaurant } from '../graphql/mutations';
+import { createAddMenu } from '../graphql/mutations';
 
-export default function CreateRestaurant() {
+export default function CreateAddMenu() {
 
   const [userData, setUserData] = useState({ payload: { username: '' } });
   const [errorMessages, setErrorMessages] = useState([]);
@@ -21,8 +21,9 @@ export default function CreateRestaurant() {
   function validateForm() {
     try {
       return (
-        fields.name.length > 0 &&
-        fields.description.length > 0
+        fields.dishname.length > 0 &&
+        fields.ingredients.length > 0 &&
+        fields.price.length > 0
       );
     } catch (e) {
       return false;
@@ -32,12 +33,12 @@ export default function CreateRestaurant() {
   async function regForm(event) {
     event.preventDefault();
     try {
-      await API.graphql(graphqlOperation(createRestaurant, {input: { name: fields.name, description: fields.description, image: fields.image }}));
+      await API.graphql(graphqlOperation(createAddMenu, {input: { dishname: fields.dishname, ingredients: fields.ingredients, image: fields.image, price: fields.price }}));
     } catch (e) {
       console.error('error creating restaurant', e);
       setErrorMessages(e.errors);
     }
-    history.push("/");
+    history.push("/addmenu");
   }
 
   function renderForm() {
