@@ -18,16 +18,16 @@ export default function CreateRestaurant() {
   });
   const history = useHistory();
 
-  function validateForm() {
-    try {
-      return (
-        fields.name.length > 0 &&
-        fields.description.length > 0
-      );
-    } catch (e) {
-      return false;
-    }
-  }
+//   function validateForm() {
+//     try {
+//       return (
+//         fields.name.length > 0 &&
+//         fields.description.length > 0
+//       );
+//     } catch (e) {
+//       return false;
+//     }
+//   }
 
   async function regForm(event) {
     event.preventDefault();
@@ -61,7 +61,7 @@ export default function CreateRestaurant() {
               onChange={handleFieldChange}
             />
           </Form.Group>
-          <Button block type="submit" disabled={!validateForm()} variant="warning">
+          <Button block type="submit" variant="warning">{/* disabled={!validateForm()} */}
             Register
           </Button>
         </Form>
