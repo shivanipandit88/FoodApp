@@ -11,9 +11,10 @@ export default function CreateRestaurant() {
   const [userData, setUserData] = useState({ payload: { username: '' } });
   const [errorMessages, setErrorMessages] = useState([]);
   const [fields, handleFieldChange] = useFormFields({
-    name: "",
-    description: "",
-    image: ""
+    dishname: "",
+    ingredients: "",
+    image: "",
+    price: ""
   });
   const history = useHistory();
 
@@ -36,31 +37,38 @@ export default function CreateRestaurant() {
       console.error('error creating restaurant', e);
       setErrorMessages(e.errors);
     }
-    history.push("/addmenu");
+    history.push("/");
   }
 
   function renderForm() {
     return (
       <div>
         <Form onSubmit={regForm} className="regForm">
-          <Form.Group controlId="name" size="lg">
-            <Form.Label>Restaurant Name</Form.Label>
+          <Form.Group controlId="dishname" size="lg">
+            <Form.Label>Dish Name</Form.Label>
             <Form.Control
               type="text"
-              value={fields.name}
+              value={fields.dishname}
               onChange={handleFieldChange}
             />
           </Form.Group>
-          <Form.Group controlId="description" size="lg">
-            <Form.Label>Restaurant Description</Form.Label>
+          <Form.Group controlId="ingredients" size="lg">
+            <Form.Label>Ingredients</Form.Label>
             <Form.Control
               type="text"
-              value={fields.description}
+              value={fields.ingredients}
+              onChange={handleFieldChange}
+            />
+          </Form.Group><Form.Group controlId="price" size="lg">
+            <Form.Label>Price</Form.Label>
+            <Form.Control
+              type="text"
+              value={fields.price}
               onChange={handleFieldChange}
             />
           </Form.Group>
           <Form.Group controlId="image" size="lg" className="mb-3">
-            <Form.Label>Upload an Image to represent your Restarant</Form.Label>
+            <Form.Label>Upload an Image</Form.Label>
             <Form.Control 
               type="file"
               value={fields.image}
@@ -78,7 +86,7 @@ export default function CreateRestaurant() {
   return (
     <div className="main"> 
         <Container>
-            <h1>Register Your Restaurant</h1> 
+            <h1>Add your Menu</h1> 
             {renderForm()} 
         </Container>
     </div>);

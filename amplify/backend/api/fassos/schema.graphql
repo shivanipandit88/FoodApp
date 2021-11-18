@@ -4,3 +4,11 @@ type Restaurant @model {
   description: String
   image: String
 }
+
+type AddMenu @model {
+  id: ID!
+  dishname: String!
+  ingredients: String
+  image: String
+  price: Int
+}
