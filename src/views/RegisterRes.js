@@ -1,12 +1,10 @@
-import Amplify, { Auth, API, graphqlOperation } from 'aws-amplify';
+import { Auth, API, graphqlOperation } from 'aws-amplify';
 import { AmplifyChatbot } from "@aws-amplify/ui-react";
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Image, Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { useFormFields } from "../lib/hooksLib";
 import { createRestaurant } from '../graphql/mutations';
-import awsconfig from '../aws-exports';
-Amplify.configure(awsconfig);
 
 export default function CreateRestaurant() {
 
@@ -18,24 +16,23 @@ export default function CreateRestaurant() {
   });
   const history = useHistory();
 
-//   function validateForm() {
-//     try {
-//       return (
-//         fields.name.length > 0 &&
-//         fields.description.length > 0
-//       );
-//     } catch (e) {
-//       return false;
-//     }
-//   }
+  function validateForm() {
+    try {
+      return (
+        fields.name.length > 0 &&
+        fields.description.length > 0
+      );
+    } catch (e) {
+      return false;
+    }
+  }
 
   async function regForm(event) {
     event.preventDefault();
-    const restaurant = { name: "Default Name", description: "Default Description" };
     try {
-      await API.graphql(graphqlOperation(createRestaurant, {input: restaurant}));
+      await API.graphql(graphqlOperation(createRestaurant, {input: { name: fields.name, description: fields.description, image: fields.image }}));
     } catch (e) {
-      console.error('Restaurant not created', e);
+      console.error('error creating restaurant', e);
       setErrorMessages(e.errors);
     }
     history.push("/");
@@ -61,7 +58,15 @@ export default function CreateRestaurant() {
               onChange={handleFieldChange}
             />
           </Form.Group>
-          <Button block type="submit" variant="warning">{/* disabled={!validateForm()} */}
+          <Form.Group controlId="image" size="lg" className="mb-3">
+            <Form.Label>Upload an Image to represent your Restarant</Form.Label>
+            <Form.Control 
+              type="file"
+              value={fields.image}
+              onChange={handleFieldChange}
+            />
+        </Form.Group>
+          <Button block type="submit" disabled={!validateForm()} variant="warning">
             Register
           </Button>
         </Form>

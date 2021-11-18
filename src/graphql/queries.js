@@ -7,6 +7,7 @@ export const getRestaurant = /* GraphQL */ `
       id
       name
       description
+      image
       createdAt
       updatedAt
     }
@@ -23,6 +24,7 @@ export const listRestaurants = /* GraphQL */ `
         id
         name
         description
+        image
         createdAt
         updatedAt
       }
