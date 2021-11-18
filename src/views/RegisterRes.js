@@ -1,4 +1,4 @@
-import { Auth, API, graphqlOperation, Storage } from 'aws-amplify';
+import { Auth, API, graphqlOperation } from 'aws-amplify';
 import { AmplifyChatbot } from "@aws-amplify/ui-react";
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Image, Button } from "react-bootstrap";
@@ -10,8 +10,6 @@ export default function CreateRestaurant() {
 
   const [userData, setUserData] = useState({ payload: { username: '' } });
   const [errorMessages, setErrorMessages] = useState([]);
-  const [imgname, setImgName] = useState('')
-  const [imgfile, setImgFile] = useState('')
   const [fields, handleFieldChange] = useFormFields({
     name: "",
     description: "",
@@ -31,36 +29,8 @@ export default function CreateRestaurant() {
     }
   }
 
-  const onChange = (e) => {
-    e.preventDefault()
-    if (e.target.files[0] !== null) {
-      setImgFile(e.target.files[0])
-      setImgName(e.target.files[0].imgname)
-    }
-  }
-
   async function regForm(event) {
     event.preventDefault();
-    if (imgfile) {
-        Storage.put(imgname, imgfile, {
-          /* level: 'protected', */
-          contentType: imgfile.type,
-        })
-          .then((result) => {
-            console.log(result)
-            setErrorMessages(`Success uploading file: ${imgname}!`)
-          })
-          .then(() => {
-            document.getElementById('file-input').value = null
-            setImgFile(null)
-          })
-          .catch((err) => {
-            console.log(err)
-            setErrorMessages(`Can't upload file: ${err}`)
-          })
-      } else {
-        setErrorMessages(`Files needed!`)
-      }
     try {
       await API.graphql(graphqlOperation(createRestaurant, {input: { name: fields.name, description: fields.description, image: fields.image }}));
     } catch (e) {
@@ -95,7 +65,7 @@ export default function CreateRestaurant() {
             <Form.Control 
               type="file"
               value={fields.image}
-              onChange={(e) => onChange(e)}
+              onChange={handleFieldChange}
             />
         </Form.Group>
           <Button block type="submit" disabled={!validateForm()} variant="warning">
