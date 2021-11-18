@@ -6,8 +6,20 @@ import food1 from '../assets/food1.jpg';
 import food2 from '../assets/food2.jpg';
 import food3 from '../assets/food3.jpg';
 import food4 from '../assets/food4.jpg';
+import { listRestaurants } from '../graphql/queries';
 
 export default function Restaurant() {
+
+    const [restaurants, setRestaurants] = useState([]);
+
+    useEffect(() => {
+        fetchRestaurants();
+      }, []);
+    
+      async function fetchRestaurants() {
+        const apiData = await API.graphql({ query: listRestaurants });
+        setRestaurants(apiData.data.listRestaurants.items);
+      }
 
     return (
         <div className='main restaurant'>
@@ -15,54 +27,16 @@ export default function Restaurant() {
                 <h1>Restaurants</h1>
                 <div>
                     <Row className="align-items-center">
+                    {
+                        restaurants.map(restaurants => (
                         <Col md={4} sm={6} xs={12} style={{ fontSize: "18px" }}>
                             <Link to="/menu" className="indiRes">
-                                <Image src={food1} alt="Restaurant 1" />
-                                <p>Restaurant Name 1</p>
+                                <Image src={restaurants.image} alt="Restaurant 1" />
+                                <p>{restaurants.name}</p>
                             </Link>
                         </Col>
-                        <Col md={4} sm={6} xs={12} style={{ fontSize: "18px" }}>
-                            <Link to="/menu" className="indiRes">
-                                <Image src={food2} alt="Restaurant 2" />
-                                <p>Restaurant Name 2</p>
-                            </Link>
-                        </Col>
-                        <Col md={4} sm={6} xs={12} style={{ fontSize: "18px" }}>
-                            <Link to="/menu" className="indiRes">
-                                <Image src={food3} alt="Restaurant 3" />
-                                <p>Restaurant Name 3</p>
-                            </Link>
-                        </Col>
-                        <Col md={4} sm={6} xs={12} style={{ fontSize: "18px" }}>
-                            <Link to="/menu" className="indiRes">
-                                <Image src={food4} alt="Restaurant 4" />
-                                <p>Restaurant Name 4</p>
-                            </Link>
-                        </Col>
-                        <Col md={4} sm={6} xs={12} style={{ fontSize: "18px" }}>
-                            <Link to="/menu" className="indiRes">
-                                <Image src={food1} alt="Restaurant 1" />
-                                <p>Restaurant Name 1</p>
-                            </Link>
-                        </Col>
-                        <Col md={4} sm={6} xs={12} style={{ fontSize: "18px" }}>
-                            <Link to="/menu" className="indiRes">
-                                <Image src={food2} alt="Restaurant 2" />
-                                <p>Restaurant Name 2</p>
-                            </Link>
-                        </Col>
-                        <Col md={4} sm={6} xs={12} style={{ fontSize: "18px" }}>
-                            <Link to="/menu" className="indiRes">
-                                <Image src={food3} alt="Restaurant 3" />
-                                <p>Restaurant Name 3</p>
-                            </Link>
-                        </Col>
-                        <Col md={4} sm={6} xs={12} style={{ fontSize: "18px" }}>
-                            <Link to="/menu" className="indiRes">
-                                <Image src={food4} alt="Restaurant 4" />
-                                <p>Restaurant Name 4</p>
-                            </Link>
-                        </Col>
+                        ))
+                    }
                     </Row>
                 </div>
             </Container>
