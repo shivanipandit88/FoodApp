@@ -8,6 +8,7 @@ export const getRestaurant = /* GraphQL */ `
       name
       description
       image
+      username
       createdAt
       updatedAt
     }
@@ -25,6 +26,7 @@ export const listRestaurants = /* GraphQL */ `
         name
         description
         image
+        username
         createdAt
         updatedAt
       }
@@ -46,6 +48,7 @@ export const getAddMenu = /* GraphQL */ `
         name
         description
         image
+        username
         createdAt
         updatedAt
       }
@@ -73,6 +76,7 @@ export const listAddMenus = /* GraphQL */ `
           name
           description
           image
+          username
           createdAt
           updatedAt
         }

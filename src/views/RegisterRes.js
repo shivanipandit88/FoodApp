@@ -31,7 +31,7 @@ export default function CreateRestaurant() {
   async function regForm(event) {
     event.preventDefault();
     try {
-      await API.graphql(graphqlOperation(createRestaurant, {input: { name: fields.name, description: fields.description, image: fields.image }}));
+      await API.graphql(graphqlOperation(createRestaurant, {input: { name: fields.name, description: fields.description, image: fields.image, username: username }}));
     } catch (e) {
       console.error('error creating restaurant', e);
       setErrorMessages(e.errors);

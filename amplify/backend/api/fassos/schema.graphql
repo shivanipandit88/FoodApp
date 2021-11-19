@@ -3,6 +3,7 @@ type Restaurant @model {
   name: String!
   description: String
   image: String
+  username: String
 }
 
 type AddMenu @model {

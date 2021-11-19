@@ -8,6 +8,7 @@ export const onCreateRestaurant = /* GraphQL */ `
       name
       description
       image
+      username
       createdAt
       updatedAt
     }
@@ -20,6 +21,7 @@ export const onUpdateRestaurant = /* GraphQL */ `
       name
       description
       image
+      username
       createdAt
       updatedAt
     }
@@ -32,6 +34,7 @@ export const onDeleteRestaurant = /* GraphQL */ `
       name
       description
       image
+      username
       createdAt
       updatedAt
     }
@@ -51,6 +54,7 @@ export const onCreateAddMenu = /* GraphQL */ `
         name
         description
         image
+        username
         createdAt
         updatedAt
       }
@@ -73,6 +77,7 @@ export const onUpdateAddMenu = /* GraphQL */ `
         name
         description
         image
+        username
         createdAt
         updatedAt
       }
@@ -95,6 +100,7 @@ export const onDeleteAddMenu = /* GraphQL */ `
         name
         description
         image
+        username
         createdAt
         updatedAt
       }
