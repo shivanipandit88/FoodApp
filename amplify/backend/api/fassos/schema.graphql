@@ -3,7 +3,7 @@ type Restaurant @model {
   name: String!
   description: String
   image: String
-  username: String
+  username: String!
 }
 
 type AddMenu @model {
@@ -12,6 +12,6 @@ type AddMenu @model {
   ingredients: String!
   image: String
   price: Int!
-  dishid: ID!
-  restaurant: Restaurant @connection(fields: ["dishid"])
+  restaurantid: ID!
+  restaurant: Restaurant @connection(fields: ["restaurantid"])
 }

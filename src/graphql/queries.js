@@ -42,7 +42,7 @@ export const getAddMenu = /* GraphQL */ `
       ingredients
       image
       price
-      dishid
+      restaurantid
       restaurant {
         id
         name
@@ -70,7 +70,7 @@ export const listAddMenus = /* GraphQL */ `
         ingredients
         image
         price
-        dishid
+        restaurantid
         restaurant {
           id
           name
