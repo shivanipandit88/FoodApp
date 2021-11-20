@@ -35,6 +35,7 @@ function App() {
   }
   Hub.listen('auth', listener);
 
+  //User Information
   const [userData, setUserData] = useState({ payload: { username: '' } });
 
   useEffect(() => {
@@ -49,6 +50,7 @@ function App() {
       })
       .catch((e) => console.log("Not signed in", e));
   }
+  //END User Information
 
   function isAdmin() {
     return userData.payload['cognito:groups'] && userData.payload['cognito:groups'][0] === "Admins";

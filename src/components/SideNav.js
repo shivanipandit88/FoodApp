@@ -1,10 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { AmplifySignOut } from '@aws-amplify/ui-react';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
+import { listRestaurants } from '../graphql/queries';
+import { API, Auth } from 'aws-amplify';
 
 const SideNav = (props) => {
+
+    const [restaurants, setRestaurants] = useState([]);
+    const [userData, setUserData] = useState({ payload: { username: '' } });
+
+    useEffect(() => {
+        fetchUserData();
+        }, []);
+    
+      async function fetchUserData() {
+        await Auth.currentAuthenticatedUser()
+          .then((userSession) => {
+            console.log("userData: ", userSession);
+            setUserData(userSession.signInUserSession.accessToken);
+          })
+          .catch((e) => console.log("Not signed in", e));
+      }
+
+    useEffect(() => {
+        fetchRestaurants();
+      }, []);
+    
+      async function fetchRestaurants() {
+        const apiData = await API.graphql({ query: listRestaurants, variables: { username: userData.payload.username} });
+        setRestaurants(apiData.data.listRestaurants.items);
+      }
 
     const SidebarData = [
         {
@@ -27,8 +54,21 @@ const SideNav = (props) => {
         }
     ];
 
+    const SidebarDataRes = [
+        {
+            title: 'Your Restaurants',
+            path: '/',
+            icon: <FaIcons.FaUtensils />,
+            cName: 'nav-text'
+        }
+    ];
+
     const [sidebar, setSidebar] = useState(false);
     const showSidebar = () => setSidebar(!sidebar);
+
+    function ifRestaurant() {
+        
+    }
 
     return (
         <>
@@ -56,6 +96,7 @@ const SideNav = (props) => {
                             </li>
                         );
                     })}
+                    {ifRestaurant()}
                 </ul>
             </nav>
         </>

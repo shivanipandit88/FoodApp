@@ -1,4 +1,4 @@
-import { Storage, API, graphqlOperation } from 'aws-amplify';
+import { Auth, Storage, API, graphqlOperation } from 'aws-amplify';
 import { AmplifyChatbot } from "@aws-amplify/ui-react";
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Image, Button } from "react-bootstrap";
@@ -7,6 +7,20 @@ import { useFormFields } from "../lib/hooksLib";
 import { createRestaurant } from '../graphql/mutations';
 
 export default function CreateRestaurant() {
+
+  //User Informantion
+  useEffect(() => {
+    fetchUserData();
+    }, []);
+
+  async function fetchUserData() {
+    await Auth.currentAuthenticatedUser()
+      .then((userSession) => {
+        console.log("userData: ", userSession);
+        setUserData(userSession.signInUserSession.accessToken);
+      })
+      .catch((e) => console.log("Not signed in", e));
+  }
 
   const [userData, setUserData] = useState({ payload: { username: '' } });
   const [errorMessages, setErrorMessages] = useState([]);
@@ -31,7 +45,7 @@ export default function CreateRestaurant() {
   async function regForm(event) {
     event.preventDefault();
     try {
-      await API.graphql(graphqlOperation(createRestaurant, {input: { name: fields.name, description: fields.description, image: fields.image }}));
+      await API.graphql(graphqlOperation(createRestaurant, {input: { name: fields.name, description: fields.description, image: fields.image, username: userData.payload.username }}));
     } catch (e) {
       console.error('error creating restaurant', e);
       setErrorMessages(e.errors);
