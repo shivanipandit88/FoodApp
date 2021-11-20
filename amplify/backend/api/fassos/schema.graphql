@@ -14,8 +14,10 @@ type AddMenu @model {
   price: Int!
   restaurantid: ID!
   restaurant: Restaurant @connection(fields: ["restaurantid"])
-<<<<<<< HEAD
 }
-=======
+
+type Order @model {
+  id: ID!
+  username: String!
+  menuItems: String!  
 }
->>>>>>> 1e70180d6f59515f1dba0400fa0dd054edb45054
