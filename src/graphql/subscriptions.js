@@ -118,3 +118,69 @@ export const onDeleteOrder = /* GraphQL */ `
     }
   }
 `;
+export const onCreateCart = /* GraphQL */ `
+  subscription OnCreateCart {
+    onCreateCart {
+      id
+      username
+      menuItems
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateCart = /* GraphQL */ `
+  subscription OnUpdateCart {
+    onUpdateCart {
+      id
+      username
+      menuItems
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteCart = /* GraphQL */ `
+  subscription OnDeleteCart {
+    onDeleteCart {
+      id
+      username
+      menuItems
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateCartTable = /* GraphQL */ `
+  subscription OnCreateCartTable {
+    onCreateCartTable {
+      id
+      username
+      menuItems
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateCartTable = /* GraphQL */ `
+  subscription OnUpdateCartTable {
+    onUpdateCartTable {
+      id
+      username
+      menuItems
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteCartTable = /* GraphQL */ `
+  subscription OnDeleteCartTable {
+    onDeleteCartTable {
+      id
+      username
+      menuItems
+      createdAt
+      updatedAt
+    }
+  }
+`;

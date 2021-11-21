@@ -27,3 +27,9 @@ type Cart @model {
   username: String!
   menuItems: String!  
 }
+
+type CartTable @model {
+  id: ID!
+  username: String!
+  menuItems: String!  
+}

@@ -24,7 +24,7 @@
       "function": {
         "S3Trigger01242f38": {
           "deploymentBucketName": "amplify-fassos-dev-14516-deployment",
-          "s3Key": "amplify-builds/S3Trigger01242f38-4f47466f6a316946356e-build.zip"
+          "s3Key": "amplify-builds/S3Trigger01242f38-623938756c6f774e794e-build.zip"
         }
       }
     }
