@@ -1,4 +1,4 @@
-# Food App ( Cloud Technologies Project 2 )
+# Fassos ( Cloud Technologies Project 2 )
 
 - University Name: http://www.sjsu.edu/
 - Course: [Cloud Technologies](https://sjsu.instructure.com/courses/1464821)
@@ -18,7 +18,7 @@
 - Local configuration
 - How to set up and run project locally?
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). And setup by following the [AWS amplify setup doc](https://docs.amplify.aws/start/q/integration/react/)
 
 ### Available Scripts
 
