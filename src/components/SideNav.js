@@ -79,6 +79,7 @@ const SideNav = (props) => {
         fetchRoles();
     }, [sidebar]);
 
+    console.log(restaurants.length);
 
     async function fetchRoles() {
         const isReg = () =>{
