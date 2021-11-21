@@ -11,6 +11,7 @@ import Menu from './views/Menu';
 import Cart from './views/Cart';
 import Register from './views/RegisterRes';
 import AddMenu from './views/AddMenu';
+import Your_Restaurants from './views/Your_Restaurants';
 Amplify.configure(awsconfig);
 
 function App() {
@@ -75,6 +76,7 @@ function App() {
               <Route path='/cart' exact component={Cart} />
               <Route path='/register' exact component={Register} />
               <Route path='/addmenu' exact component={AddMenu} />
+              <Route path='/yourrestaurants' exact component={Your_Restaurants} />
             </Switch>
           </Router>
       <hr />

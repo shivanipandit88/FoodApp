@@ -4,7 +4,7 @@ import { AmplifySignOut } from '@aws-amplify/ui-react';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import { listRestaurants } from '../graphql/queries';
-import { API, Auth } from 'aws-amplify';
+import { API, Auth, graphqlOperation } from 'aws-amplify';
 
 const SideNav = (props) => {
 
@@ -24,50 +24,73 @@ const SideNav = (props) => {
           .catch((e) => console.log("Not signed in", e));
       }
 
-    useEffect(() => {
+      useEffect(() => {
         fetchRestaurants();
       }, []);
     
       async function fetchRestaurants() {
-        const apiData = await API.graphql({ query: listRestaurants, variables: { username: userData.payload.username} });
+        // const apiData = await API.graphql({ query: listRestaurants });
+        const apiData = await API.graphql(graphqlOperation(listRestaurants, {
+            filter: {
+                username: {
+                    eq: userData.payload.username
+                }
+            }
+        }));
         setRestaurants(apiData.data.listRestaurants.items);
       }
 
-    const SidebarData = [
+    const SidebarData = function(isReg) { return [
         {
             title: 'Restaurants',
             path: '/',
             icon: <FaIcons.FaUtensils />,
-            cName: 'nav-text'
+            cName: 'nav-text',
+            show: true
         },
         {
             title: 'Cart',
             path: '/cart',
             icon: <FaIcons.FaShoppingCart />,
-            cName: 'nav-text'
+            cName: 'nav-text',
+            show: true
         },
         {
             title: 'Register Restaurant',
             path: '/register',
             icon: <FaIcons.FaEdit />,
-            cName: 'nav-text'
-        }
-    ];
-
-    const SidebarDataRes = [
+            cName: 'nav-text',
+            show: true
+        },
         {
             title: 'Your Restaurants',
-            path: '/',
-            icon: <FaIcons.FaUtensils />,
-            cName: 'nav-text'
+            path: '/yourrestaurants',
+            icon: <FaIcons.FaEdit />,
+            cName: 'nav-text',
+            show: isReg
         }
-    ];
+    ]};
 
     const [sidebar, setSidebar] = useState(false);
+    const [sidebarData, setSidebarData] = useState(SidebarData());
     const showSidebar = () => setSidebar(!sidebar);
 
-    function ifRestaurant() {
-        
+    useEffect(() => {
+        fetchRoles();
+    }, [sidebar]);
+
+
+    async function fetchRoles() {
+        const isReg = () =>{
+                if (restaurants.length == 0)
+                {
+                    return false;
+                }
+                else return true;
+        }
+        const updatedSideBarData = SidebarData(isReg());
+        console.log('updatedSideBarData', updatedSideBarData);
+        setSidebarData(updatedSideBarData);
     }
 
     return (
@@ -76,7 +99,7 @@ const SideNav = (props) => {
                 <Link to='#' className='menu-bars'>
                     <FaIcons.FaBars onClick={showSidebar} />
                 </Link>
-                <a href="/" className='title'>Fassos</a>
+                <div className='title'>Fassos</div>
                 <AmplifySignOut />
             </div>
             <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
@@ -86,17 +109,16 @@ const SideNav = (props) => {
                             <AiIcons.AiOutlineClose />
                         </Link>
                     </li>
-                    {SidebarData.map((item, index) => {
-                        return (
+                    {sidebarData.map((item, index) => {
+                        return ( item.show ?
                             <li key={index} className={item.cName}>
                                 <Link to={item.path}>
                                     {item.icon}
                                     <span>{item.title}</span>
                                 </Link>
-                            </li>
+                            </li> : ""
                         );
                     })}
-                    {ifRestaurant()}
                 </ul>
             </nav>
         </>
