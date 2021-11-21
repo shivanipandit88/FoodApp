@@ -1,8 +1,26 @@
-# Getting Started with Create React App
+# Fassos ( Cloud Technologies Project 2 )
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- University Name: http://www.sjsu.edu/
+- Course: [Cloud Technologies](https://sjsu.instructure.com/courses/1464821)
+- Professor [Sanjay Garje](https://www.linkedin.com/in/sanjaygarje/) (This is link to LinkedIn Profile)
+- Students:
+    - [Shivani Pandit](https://www.linkedin.com/in/shivanikpandit/)
+    - [Chirag Rajpal](https://www.linkedin.com/in/chirag-rajpal/)
+    - [Satish Kathiriya](https://www.linkedin.com/in/satishkathiriya/)
+    - [Supreetha M A](https://www.linkedin.com/in/supreetha-m-a-a18340103/)
+- Project Introduction (What the application does, feature list)
+- Sample Demo Screenshots
+- Pre-requisites Set Up
+- Here include bullet point list of resources one need to configure in their cloud account. (E.g. For AWS: S3 buckets, CloudFront etc)
+- List of required software to download locally (E.g. Spring, JDK, Eclipse IDE etc. )
+    Node 
+    AWS Amplify
+- Local configuration
+- How to set up and run project locally?
 
-## Available Scripts
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). And setup by following the [AWS amplify setup doc](https://docs.amplify.aws/start/q/integration/react/)
+
+### Available Scripts
 
 In the project directory, you can run:
 
@@ -39,7 +57,7 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+### Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
