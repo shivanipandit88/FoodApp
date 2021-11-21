@@ -9,7 +9,7 @@ import food4 from '../assets/food4.jpg';
 import { listRestaurants } from '../graphql/queries';
 
 export default function Restaurant() {
-
+    const history = useHistory();
     const [restaurants, setRestaurants] = useState([]);
 
     useEffect(() => {
@@ -25,16 +25,18 @@ export default function Restaurant() {
     return (
         <div className='main restaurant'>
             <Container>
-                <h1>Restaurants</h1>
+                <h1>Your Restaurants</h1>
                 <div>
                     <Row className="align-items-center">
                     {
                         restaurants.map(restaurants => (
-                        <Col md={4} sm={6} xs={12} style={{ fontSize: "18px" }}>
-                            <Link to="/menu" className="indiRes">
-                                <Image src={restaurants.image} alt="Restaurant 1" />
+                        <Col md={4} sm={6} xs={12} style={{ fontSize: "18px" }} key={restaurants.id}>
+                            <div className="indiRes" onClick={() => {
+                                history.push('/menu', { state: { id: restaurants.id } })
+                            }}>
+                            <Image src={restaurants.image} alt="Restaurant 1" />
                                 <p>{restaurants.name}</p>
-                            </Link>
+                            </div>
                         </Col>
                         ))
                     }

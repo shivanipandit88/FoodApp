@@ -1,4 +1,4 @@
-import { Storage, API, graphqlOperation } from 'aws-amplify';
+import { Storage, API, graphqlOperation, Auth } from 'aws-amplify';
 import { AmplifyChatbot } from "@aws-amplify/ui-react";
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Image, Button } from "react-bootstrap";
@@ -8,13 +8,28 @@ import { createAddMenu } from '../graphql/mutations';
 
 export default function CreateAddMenu() {
 
+  //User Informantion
+  useEffect(() => {
+    fetchUserData();
+    }, []);
+
+  async function fetchUserData() {
+    await Auth.currentAuthenticatedUser()
+      .then((userSession) => {
+        console.log("userData: ", userSession);
+        setUserData(userSession.signInUserSession.accessToken);
+      })
+      .catch((e) => console.log("Not signed in", e));
+  }
+
   const [userData, setUserData] = useState({ payload: { username: '' } });
   const [errorMessages, setErrorMessages] = useState([]);
   const [fields, handleFieldChange] = useFormFields({
     dishname: "",
     ingredients: "",
     image: "",
-    price: ""
+    price: "",
+    resName: ""
   });
   const history = useHistory();
 
@@ -33,7 +48,7 @@ export default function CreateAddMenu() {
   async function regForm(event) {
     event.preventDefault();
     try {
-      await API.graphql(graphqlOperation(createAddMenu, {input: { dishname: fields.dishname, ingredients: fields.ingredients, image: fields.image, price: fields.price }}));
+      await API.graphql(graphqlOperation(createAddMenu, {input: { dishname: fields.dishname, ingredients: fields.ingredients, image: fields.image, price: fields.price, resName: fields.resName, username: userData.payload.username }}));
     } catch (e) {
       console.error('error creating restaurant', e);
       setErrorMessages(e.errors);
@@ -65,6 +80,14 @@ export default function CreateAddMenu() {
             <Form.Control
               type="text"
               value={fields.price}
+              onChange={handleFieldChange}
+            />
+          </Form.Group>
+          <Form.Group controlId="resName" size="lg">
+            <Form.Label>Restaurant Name</Form.Label>
+            <Form.Control
+              type="text"
+              value={fields.resName}
               onChange={handleFieldChange}
             />
           </Form.Group>

@@ -48,6 +48,8 @@ export const onCreateAddMenu = /* GraphQL */ `
       ingredients
       image
       price
+      resName
+      username
       createdAt
       updatedAt
     }
@@ -61,6 +63,8 @@ export const onUpdateAddMenu = /* GraphQL */ `
       ingredients
       image
       price
+      resName
+      username
       createdAt
       updatedAt
     }
@@ -74,6 +78,41 @@ export const onDeleteAddMenu = /* GraphQL */ `
       ingredients
       image
       price
+      resName
+      username
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateOrder = /* GraphQL */ `
+  subscription OnCreateOrder {
+    onCreateOrder {
+      id
+      username
+      menuItems
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateOrder = /* GraphQL */ `
+  subscription OnUpdateOrder {
+    onUpdateOrder {
+      id
+      username
+      menuItems
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteOrder = /* GraphQL */ `
+  subscription OnDeleteOrder {
+    onDeleteOrder {
+      id
+      username
+      menuItems
       createdAt
       updatedAt
     }

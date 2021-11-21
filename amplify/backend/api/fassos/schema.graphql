@@ -12,9 +12,17 @@ type AddMenu @model {
   ingredients: String!
   image: String
   price: Int!
+  resName: String!
+  username: String!
 }
 
 type Order @model {
+  id: ID!
+  username: String!
+  menuItems: String!  
+}
+
+type Cart @model {
   id: ID!
   username: String!
   menuItems: String!  

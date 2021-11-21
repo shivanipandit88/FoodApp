@@ -241,6 +241,10 @@ amplify-sign-out{
   text-decoration: none;
 }
 
+.restaurant .indiRes:hover{
+  cursor: pointer;
+}
+
 .restaurant .indiRes:hover p{
   color: #ff9900;
 }

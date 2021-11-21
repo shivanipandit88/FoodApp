@@ -13,6 +13,7 @@ export default function Restaurant() {
     const [restaurants, setRestaurants] = useState([]);
     const [userData, setUserData] = useState({ payload: { username: '' } });
 
+    const history = useHistory();
     useEffect(() => {
         fetchUserData();
         }, []);
@@ -50,11 +51,13 @@ export default function Restaurant() {
                     <Row className="align-items-center">
                     {
                         restaurants.map(restaurants => (
-                        <Col md={4} sm={6} xs={12} style={{ fontSize: "18px" }}>
-                            <Link to="/menu" className="indiRes">
-                                <Image src={restaurants.image} alt="Restaurant 1" />
+                        <Col md={4} sm={6} xs={12} style={{ fontSize: "18px" }} key={restaurants.id}>
+                            <div onClick={() => {
+                                history.push('/menu', { state: { id: restaurants.id } })
+                            }}>
+                            <Image src={restaurants.image} alt="Restaurant 1" />
                                 <p>{restaurants.name}</p>
-                            </Link>
+                            </div>
                         </Col>
                         ))
                     }

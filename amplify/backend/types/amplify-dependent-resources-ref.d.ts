@@ -10,6 +10,12 @@ export type AmplifyDependentResourcesAttributes = {
             "AppClientID": "string"
         }
     },
+    "api": {
+        "fassos": {
+            "GraphQLAPIIdOutput": "string",
+            "GraphQLAPIEndpointOutput": "string"
+        }
+    },
     "function": {
         "S3Trigger01242f38": {
             "Name": "string",
