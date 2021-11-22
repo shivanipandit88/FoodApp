@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory, Link, useLocation } from "react-router-dom";
 import { Container, Row, Col, Table, Image, Button } from "react-bootstrap";
 import food5 from '../assets/food5.jpg';
-import { listAddMenus } from '../graphql/queries';
+import { listAddMenus, listRestaurants } from '../graphql/queries';
 import { createCartTable } from '../graphql/mutations';
 
 
@@ -40,7 +40,6 @@ export default function Menu() {
         }));
         console.log(apiData)
         setRestaurants(apiData.data.listRestaurants.items);
-      const [userData, setUserData] = useState({ payload: { username: '' } });
     }
     const history = useHistory();
     

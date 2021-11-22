@@ -42,8 +42,17 @@ export const getAddMenu = /* GraphQL */ `
       ingredients
       image
       price
-      resName
+      resid
       username
+      restaurant {
+        id
+        name
+        description
+        image
+        username
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -62,8 +71,17 @@ export const listAddMenus = /* GraphQL */ `
         ingredients
         image
         price
-        resName
+        resid
         username
+        restaurant {
+          id
+          name
+          description
+          image
+          username
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -89,35 +107,6 @@ export const listOrders = /* GraphQL */ `
     $nextToken: String
   ) {
     listOrders(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        username
-        menuItems
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const getCart = /* GraphQL */ `
-  query GetCart($id: ID!) {
-    getCart(id: $id) {
-      id
-      username
-      menuItems
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listCarts = /* GraphQL */ `
-  query ListCarts(
-    $filter: ModelCartFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listCarts(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
         username

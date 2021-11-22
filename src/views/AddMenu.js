@@ -1,12 +1,22 @@
 import { Storage, API, graphqlOperation, Auth } from 'aws-amplify';
 import { AmplifyChatbot } from "@aws-amplify/ui-react";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Container, Row, Col, Form, Image, Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { useFormFields } from "../lib/hooksLib";
 import { createAddMenu } from '../graphql/mutations';
 
 export default function CreateAddMenu() {
+
+  const file = useRef(null);
+  const [uploaded, setUploaded] = useState(false);
+  const MAX_ATTACHMENT_SIZE = 10000000;
+
+  function handleFileChange(event)
+  {
+    file.current = event.target.files[0];
+    validateForm();
+  }
 
   //User Informantion
   useEffect(() => {
@@ -27,9 +37,7 @@ export default function CreateAddMenu() {
   const [fields, handleFieldChange] = useFormFields({
     dishname: "",
     ingredients: "",
-    image: "",
-    price: "",
-    resName: ""
+    price: ""
   });
   const history = useHistory();
 
@@ -47,13 +55,29 @@ export default function CreateAddMenu() {
 
   async function regForm(event) {
     event.preventDefault();
-    try {
-      await API.graphql(graphqlOperation(createAddMenu, {input: { dishname: fields.dishname, ingredients: fields.ingredients, image: fields.image, price: fields.price, resName: fields.resName, username: userData.payload.username }}));
-    } catch (e) {
+    
+    if (file.current && file.current.size > MAX_ATTACHMENT_SIZE) {
+      alert(
+        `Please pick a file smaller than ${MAX_ATTACHMENT_SIZE / 1000000} MB.`
+      );
+      return;
+    } else {
+      console.log(file.current);
+      var path = file.current.name;
+      try {
+        await API.graphql(graphqlOperation(createAddMenu, {input: { dishname: fields.dishname, ingredients: fields.ingredients, image: fields.image, price: fields.price, resName: fields.resName, username: userData.payload.username }}));
+      await Storage.put(path, file.current,{ level: "public", }).catch((e) => console.log(e));
+
+      setUploaded(true);
+      alert("Restaurant Successfully Registered!");
+      fields.description = "";
+    } catch(e)
+    {
       console.error('error creating restaurant', e);
       setErrorMessages(e.errors);
     }
     history.push("/addmenu");
+    }
   }
 
   function renderForm() {
@@ -83,20 +107,12 @@ export default function CreateAddMenu() {
               onChange={handleFieldChange}
             />
           </Form.Group>
-          <Form.Group controlId="resName" size="lg">
-            <Form.Label>Restaurant Name</Form.Label>
-            <Form.Control
-              type="text"
-              value={fields.resName}
-              onChange={handleFieldChange}
-            />
-          </Form.Group>
           <Form.Group controlId="image" size="lg" className="mb-3">
             <Form.Label>Upload an Image</Form.Label>
             <Form.Control 
               type="file"
               value={fields.image}
-              onChange={handleFieldChange}
+              onChange={handleFileChange}
             />
         </Form.Group>
           <Button block type="submit" disabled={!validateForm()} variant="warning">

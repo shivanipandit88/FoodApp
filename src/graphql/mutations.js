@@ -60,8 +60,17 @@ export const createAddMenu = /* GraphQL */ `
       ingredients
       image
       price
-      resName
+      resid
       username
+      restaurant {
+        id
+        name
+        description
+        image
+        username
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -78,8 +87,17 @@ export const updateAddMenu = /* GraphQL */ `
       ingredients
       image
       price
-      resName
+      resid
       username
+      restaurant {
+        id
+        name
+        description
+        image
+        username
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -96,8 +114,17 @@ export const deleteAddMenu = /* GraphQL */ `
       ingredients
       image
       price
-      resName
+      resid
       username
+      restaurant {
+        id
+        name
+        description
+        image
+        username
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -137,48 +164,6 @@ export const deleteOrder = /* GraphQL */ `
     $condition: ModelOrderConditionInput
   ) {
     deleteOrder(input: $input, condition: $condition) {
-      id
-      username
-      menuItems
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const createCart = /* GraphQL */ `
-  mutation CreateCart(
-    $input: CreateCartInput!
-    $condition: ModelCartConditionInput
-  ) {
-    createCart(input: $input, condition: $condition) {
-      id
-      username
-      menuItems
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateCart = /* GraphQL */ `
-  mutation UpdateCart(
-    $input: UpdateCartInput!
-    $condition: ModelCartConditionInput
-  ) {
-    updateCart(input: $input, condition: $condition) {
-      id
-      username
-      menuItems
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteCart = /* GraphQL */ `
-  mutation DeleteCart(
-    $input: DeleteCartInput!
-    $condition: ModelCartConditionInput
-  ) {
-    deleteCart(input: $input, condition: $condition) {
       id
       username
       menuItems
