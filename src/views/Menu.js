@@ -1,9 +1,11 @@
-import { API, Auth, graphqlOperation } from 'aws-amplify';
+import { Auth, Storage, API, graphqlOperation } from 'aws-amplify';
 import React, { useState, useEffect } from 'react';
 import { useHistory, Link, useLocation } from "react-router-dom";
 import { Container, Row, Col, Table, Image, Button } from "react-bootstrap";
 import food5 from '../assets/food5.jpg';
-import { listAddMenus, listRestaurants } from '../graphql/queries';
+import { listAddMenus } from '../graphql/queries';
+import { createCartTable } from '../graphql/mutations';
+
 
 export default function Menu() {
     const location = useLocation();
@@ -13,6 +15,8 @@ export default function Menu() {
 
     useEffect(() => {
         fetchMenus();
+        fetchRestaurants();
+        fetchUserData();
       }, []);
     
       async function fetchMenus() {
@@ -25,10 +29,6 @@ export default function Menu() {
         }));
         setmenus(apiData.data.listAddMenus.items);
       }
-
-      useEffect(() => {
-        fetchRestaurants();
-      }, []);
     
       async function fetchRestaurants() {
         const apiData = await API.graphql(graphqlOperation(listRestaurants, {
@@ -40,6 +40,29 @@ export default function Menu() {
         }));
         console.log(apiData)
         setRestaurants(apiData.data.listRestaurants.items);
+      const [userData, setUserData] = useState({ payload: { username: '' } });
+    }
+    const history = useHistory();
+    
+      async function fetchUserData() {
+        await Auth.currentAuthenticatedUser()
+          .then((userSession) => {
+            console.log("userData: ", userSession);
+            setUserData(userSession.signInUserSession.accessToken);
+          })
+          .catch((e) => console.log("Not signed in", e));
+      }
+
+      async function addtoCart(menuID){
+        try {
+            await API.graphql(graphqlOperation(createCartTable, {input: { menuItems: menuID, username: userData.payload.username}}));      
+            alert("Item Added to Cart");
+            
+          } catch(e)
+          {
+            console.error('error adding to Menu', e);
+            // setErrorMessages(e.errors);
+          }
       }
 
     return (
@@ -56,10 +79,12 @@ export default function Menu() {
                             {
                                 menus.map(menus => (
                                 <tr>
+                                    <td>{menus.id}</td>
                                     <td><Image src={menus.image} alt="Restaurant 1" /></td>
                                     <td>{menus.dishname} <span>{menus.ingredients}</span></td>
                                     <td>$ {menus.price}</td>
-                                    <td><Link to="/cart" className="btn btn-dark">Add to Cart</Link></td>
+                                    <button onClick={()=>addtoCart(menus.id)} className="btn btn-dark">Add to Cart</button>
+                                    {/* <td><Link to="/cart" className="btn btn-dark" >Add to Cart</Link></td> */}
                                 </tr>
                                 ))
                             }

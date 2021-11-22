@@ -100,3 +100,61 @@ export const listOrders = /* GraphQL */ `
     }
   }
 `;
+export const getCart = /* GraphQL */ `
+  query GetCart($id: ID!) {
+    getCart(id: $id) {
+      id
+      username
+      menuItems
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listCarts = /* GraphQL */ `
+  query ListCarts(
+    $filter: ModelCartFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listCarts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        username
+        menuItems
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getCartTable = /* GraphQL */ `
+  query GetCartTable($id: ID!) {
+    getCartTable(id: $id) {
+      id
+      username
+      menuItems
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listCartTables = /* GraphQL */ `
+  query ListCartTables(
+    $filter: ModelCartTableFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listCartTables(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        username
+        menuItems
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;

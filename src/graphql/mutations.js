@@ -145,3 +145,87 @@ export const deleteOrder = /* GraphQL */ `
     }
   }
 `;
+export const createCart = /* GraphQL */ `
+  mutation CreateCart(
+    $input: CreateCartInput!
+    $condition: ModelCartConditionInput
+  ) {
+    createCart(input: $input, condition: $condition) {
+      id
+      username
+      menuItems
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateCart = /* GraphQL */ `
+  mutation UpdateCart(
+    $input: UpdateCartInput!
+    $condition: ModelCartConditionInput
+  ) {
+    updateCart(input: $input, condition: $condition) {
+      id
+      username
+      menuItems
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteCart = /* GraphQL */ `
+  mutation DeleteCart(
+    $input: DeleteCartInput!
+    $condition: ModelCartConditionInput
+  ) {
+    deleteCart(input: $input, condition: $condition) {
+      id
+      username
+      menuItems
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createCartTable = /* GraphQL */ `
+  mutation CreateCartTable(
+    $input: CreateCartTableInput!
+    $condition: ModelCartTableConditionInput
+  ) {
+    createCartTable(input: $input, condition: $condition) {
+      id
+      username
+      menuItems
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateCartTable = /* GraphQL */ `
+  mutation UpdateCartTable(
+    $input: UpdateCartTableInput!
+    $condition: ModelCartTableConditionInput
+  ) {
+    updateCartTable(input: $input, condition: $condition) {
+      id
+      username
+      menuItems
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteCartTable = /* GraphQL */ `
+  mutation DeleteCartTable(
+    $input: DeleteCartTableInput!
+    $condition: ModelCartTableConditionInput
+  ) {
+    deleteCartTable(input: $input, condition: $condition) {
+      id
+      username
+      menuItems
+      createdAt
+      updatedAt
+    }
+  }
+`;
