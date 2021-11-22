@@ -62,13 +62,13 @@ export default function CreateRestaurant() {
     } else if (file.current) {
       console.log(file.current);
       var uuid = require("uuid").v4();
-      var path = uuid+"/"+file.current.name
+      var path = file.current.name
       try {
       await API.graphql(graphqlOperation(createRestaurant, {input: { name: fields.name, description: fields.description, image: path, username: userData.payload.username }}));
       await Storage.put(path, file.current,{ level: "public", }).catch((e) => console.log(e));
 
       setUploaded(true);
-      alert("Prescription uploaded!");
+      alert("Restaurant Successfully Registered!");
       fields.description = "";
     } catch(e)
     {

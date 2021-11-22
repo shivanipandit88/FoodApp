@@ -1,24 +1,45 @@
-import { API, Auth } from 'aws-amplify';
+import { API, Auth, graphqlOperation } from 'aws-amplify';
 import React, { useState, useEffect } from 'react';
-import { useHistory, Link } from "react-router-dom";
+import { useHistory, Link, useLocation } from "react-router-dom";
 import { Container, Row, Col, Table, Image, Button } from "react-bootstrap";
-import food1 from '../assets/food1.jpg';
-import food2 from '../assets/food2.jpg';
-import food3 from '../assets/food3.jpg';
-import food4 from '../assets/food4.jpg';
 import food5 from '../assets/food5.jpg';
-import { listAddMenus } from '../graphql/queries';
+import { listAddMenus, listRestaurants } from '../graphql/queries';
 
 export default function Menu() {
+    const location = useLocation();
     const [menus, setmenus] = useState([]);
+    const [restaurants, setRestaurants] = useState([]);
+    const [userData, setUserData] = useState({ payload: { username: '' } });
 
     useEffect(() => {
         fetchMenus();
       }, []);
     
       async function fetchMenus() {
-        const apiData = await API.graphql({ query: listAddMenus });
+        const apiData = await API.graphql(graphqlOperation(listAddMenus, {
+            filter: {
+                id: {
+                    eq: restaurants.id
+                }
+            }
+        }));
         setmenus(apiData.data.listAddMenus.items);
+      }
+
+      useEffect(() => {
+        fetchRestaurants();
+      }, []);
+    
+      async function fetchRestaurants() {
+        const apiData = await API.graphql(graphqlOperation(listRestaurants, {
+            filter: {
+                id: {
+                    eq: location.state.state.id
+                }
+            }
+        }));
+        console.log(apiData)
+        setRestaurants(apiData.data.listRestaurants.items);
       }
 
     return (
