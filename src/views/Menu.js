@@ -65,22 +65,6 @@ export default function Menu() {
             // setErrorMessages(e.errors);
           }
       }
-
-    async function fetchRoles() {
-        console.log("FetchRoles Data");
-        const isReg = () =>{
-            console.log("this is restaurant username",restaurants.username)
-                    console.log("this is username",userData.payload.username)
-            if (restaurants.username === userData.payload.username)
-                {
-                    console.log("this is restaurant username inside",restaurants.username)
-                    console.log("this is username inside",userData.payload.username)
-                    return true;
-                }
-                else return false;
-            }
-        setaddMenuBtn(isReg());
-        } 
     
     function RenderAddMenuButton()
     {
@@ -96,6 +80,7 @@ export default function Menu() {
             <></>
         )
     }
+    
     return (
         <div>
             <div className="banner">
