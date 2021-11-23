@@ -1,16 +1,29 @@
 import { Storage, API, graphqlOperation, Auth } from 'aws-amplify';
 import { AmplifyChatbot } from "@aws-amplify/ui-react";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Container, Row, Col, Form, Image, Button } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { useFormFields } from "../lib/hooksLib";
 import { createAddMenu } from '../graphql/mutations';
+import { listRestaurants } from '../graphql/queries';
 
 export default function CreateAddMenu() {
+  const location = useLocation();
+  const file = useRef(null);
+  const [uploaded, setUploaded] = useState(false);
+  const MAX_ATTACHMENT_SIZE = 10000000;
+  const [restaurants, setRestaurants] = useState([]);
+
+  function handleFileChange(event)
+  {
+    file.current = event.target.files[0];
+    validateForm();
+  }
 
   //User Informantion
   useEffect(() => {
     fetchUserData();
+    fetchRestaurants();
     }, []);
 
   async function fetchUserData() {
@@ -27,9 +40,7 @@ export default function CreateAddMenu() {
   const [fields, handleFieldChange] = useFormFields({
     dishname: "",
     ingredients: "",
-    image: "",
-    price: "",
-    resName: ""
+    price: ""
   });
   const history = useHistory();
 
@@ -45,15 +56,44 @@ export default function CreateAddMenu() {
     }
   }
 
+  async function fetchRestaurants() {
+    const apiData = await API.graphql(graphqlOperation(listRestaurants, {
+        filter: {
+            username: location.state.state.id
+        }
+    }));
+    console.log(apiData)
+    setRestaurants(apiData.data.listRestaurants.items);
+  }
+
+  console.log("This is Restaurant List");
+  console.log(restaurants);
+
   async function regForm(event) {
     event.preventDefault();
-    try {
-      await API.graphql(graphqlOperation(createAddMenu, {input: { dishname: fields.dishname, ingredients: fields.ingredients, image: fields.image, price: fields.price, resName: fields.resName, username: userData.payload.username }}));
-    } catch (e) {
-      console.error('error creating restaurant', e);
+    
+    if (file.current && file.current.size > MAX_ATTACHMENT_SIZE) {
+      alert(
+        `Please pick a file smaller than ${MAX_ATTACHMENT_SIZE / 1000000} MB.`
+      );
+      return;
+    } else {
+      console.log(file.current);
+      var path = file.current.name;
+      try {
+        await API.graphql(graphqlOperation(createAddMenu, {input: { dishname: fields.dishname, ingredients: fields.ingredients, image: path, price: fields.price, resid: location.state.state.id, username: userData.payload.username }}));
+        await Storage.put(path, file.current,{ level: "public", }).catch((e) => console.log(e));
+
+      setUploaded(true);
+      alert("Item Added to Menu!");
+      fields.description = "";
+    } catch(e)
+    {
+      console.error('error adding to menu', e);
       setErrorMessages(e.errors);
     }
-    history.push("/addmenu");
+    history.push("/");
+    }
   }
 
   function renderForm() {
@@ -83,20 +123,12 @@ export default function CreateAddMenu() {
               onChange={handleFieldChange}
             />
           </Form.Group>
-          <Form.Group controlId="resName" size="lg">
-            <Form.Label>Restaurant Name</Form.Label>
-            <Form.Control
-              type="text"
-              value={fields.resName}
-              onChange={handleFieldChange}
-            />
-          </Form.Group>
           <Form.Group controlId="image" size="lg" className="mb-3">
             <Form.Label>Upload an Image</Form.Label>
             <Form.Control 
               type="file"
               value={fields.image}
-              onChange={handleFieldChange}
+              onChange={handleFileChange}
             />
         </Form.Group>
           <Button block type="submit" disabled={!validateForm()} variant="warning">
@@ -108,10 +140,33 @@ export default function CreateAddMenu() {
   }
 
   return (
+    <>
     <div className="main"> 
         <Container>
             <h1>Add your Menu</h1> 
             {renderForm()} 
         </Container>
-    </div>);
+    </div>
+    <div className='main restaurant'>
+        <Container>
+            <h1>Your Restaurants</h1>
+            <div>
+                <Row className="align-items-center">
+                {
+                    restaurants.map(restaurants => (
+                    <Col md={4} sm={6} xs={12} style={{ fontSize: "18px" }} key={restaurants.id}>
+                        <div className="indiRes" onClick={() => {
+                            history.push('/menu', { state: { id: restaurants.id } })
+                        }}>
+                        <Image src={'https://d2pmgib90mmdnn.cloudfront.net/public/' + restaurants.image} alt="Restaurant 1" />
+                            <p>{restaurants.name}</p>
+                        </div>
+                    </Col>
+                    ))
+                }
+                </Row>
+            </div>
+        </Container>
+    </div>
+</>);
 }

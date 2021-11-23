@@ -2,10 +2,6 @@ import { API, Auth, graphqlOperation } from 'aws-amplify';
 import React, { useState, useEffect } from 'react';
 import { useHistory, Link } from "react-router-dom";
 import { Container, Row, Col, Image } from "react-bootstrap";
-import food1 from '../assets/food1.jpg';
-import food2 from '../assets/food2.jpg';
-import food3 from '../assets/food3.jpg';
-import food4 from '../assets/food4.jpg';
 import { listRestaurants } from '../graphql/queries';
 
 export default function Restaurant() {
@@ -16,6 +12,7 @@ export default function Restaurant() {
     const history = useHistory();
     useEffect(() => {
         fetchUserData();
+        fetchRestaurants();
         }, []);
     
       async function fetchUserData() {
@@ -26,10 +23,6 @@ export default function Restaurant() {
           })
           .catch((e) => console.log("Not signed in", e));
       }
-
-    useEffect(() => {
-        fetchRestaurants();
-      }, []);
     
       async function fetchRestaurants() {
         const apiData = await API.graphql(graphqlOperation(listRestaurants, {
@@ -55,7 +48,7 @@ export default function Restaurant() {
                             <div onClick={() => {
                                 history.push('/menu', { state: { id: restaurants.id } })
                             }}>
-                            <Image src={restaurants.image} alt="Restaurant 1" />
+                            <Image src={'https://d2pmgib90mmdnn.cloudfront.net/public/' + restaurants.image} alt="Restaurant 1" />
                                 <p>{restaurants.name}</p>
                             </div>
                         </Col>

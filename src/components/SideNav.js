@@ -30,13 +30,7 @@ const SideNav = (props) => {
     
       async function fetchRestaurants() {
         // const apiData = await API.graphql({ query: listRestaurants });
-        const apiData = await API.graphql(graphqlOperation(listRestaurants, {
-            filter: {
-                username: {
-                    eq: userData.payload.username
-                }
-            }
-        }));
+        const apiData = await API.graphql(graphqlOperation(listRestaurants));
         setRestaurants(apiData.data.listRestaurants.items);
       }
 
@@ -61,13 +55,6 @@ const SideNav = (props) => {
             icon: <FaIcons.FaEdit />,
             cName: 'nav-text',
             show: true
-        },
-        {
-            title: 'Your Restaurants',
-            path: '/yourrestaurants',
-            icon: <FaIcons.FaEdit />,
-            cName: 'nav-text',
-            show: isReg
         }
     ]};
 
@@ -75,23 +62,29 @@ const SideNav = (props) => {
     const [sidebarData, setSidebarData] = useState(SidebarData());
     const showSidebar = () => setSidebar(!sidebar);
 
-    useEffect(() => {
-        fetchRoles();
-    }, [sidebar]);
 
-    console.log(restaurants.length);
 
-    async function fetchRoles() {
-        const isReg = () =>{
-                if (restaurants.length == 0)
-                {
-                    return false;
-                }
-                else return true;
+    function RenderAddMenuButton()
+    {
+        var res = 0;
+        for (var i = 0; i < restaurants.length; i++) {
+            if(restaurants[i].username === userData.payload.username){
+                res += 1;
+            }
+        } 
+        if(res > 0)
+        {
+            return(
+                <li className='nav-text'>
+                    <Link to='/yourrestaurants'>
+                        <FaIcons.FaUtensils /><span>Your Restaurants</span>
+                    </Link>
+                </li>
+            )
         }
-        const updatedSideBarData = SidebarData(isReg());
-        console.log('updatedSideBarData', updatedSideBarData);
-        setSidebarData(updatedSideBarData);
+        return(
+            <></>
+        )
     }
 
     return (
@@ -100,7 +93,7 @@ const SideNav = (props) => {
                 <Link to='#' className='menu-bars'>
                     <FaIcons.FaBars onClick={showSidebar} />
                 </Link>
-                <div className='title'>Fassos</div>
+                <Link to="/" className='title'>Fassos</Link>
                 <AmplifySignOut />
             </div>
             <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
@@ -120,6 +113,7 @@ const SideNav = (props) => {
                             </li> : ""
                         );
                     })}
+                    <RenderAddMenuButton />
                 </ul>
             </nav>
         </>

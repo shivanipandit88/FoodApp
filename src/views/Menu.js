@@ -1,40 +1,55 @@
 import { Auth, Storage, API, graphqlOperation } from 'aws-amplify';
 import React, { useState, useEffect } from 'react';
-import { useHistory, Link } from "react-router-dom";
+import { useHistory, Link, useLocation } from "react-router-dom";
 import { Container, Row, Col, Table, Image, Button } from "react-bootstrap";
-import food1 from '../assets/food1.jpg';
-import food2 from '../assets/food2.jpg';
-import food3 from '../assets/food3.jpg';
-import food4 from '../assets/food4.jpg';
 import food5 from '../assets/food5.jpg';
-import { listAddMenus } from '../graphql/queries';
+import { getRestaurant, listAddMenus, listRestaurants } from '../graphql/queries';
 import { createCartTable } from '../graphql/mutations';
 
 
 export default function Menu() {
+    const location = useLocation();
     const [menus, setmenus] = useState([]);
+    const [restaurants, setRestaurants] = useState({
+        username: ""
+    });
+    const [userData, setUserData] = useState({ payload: { username: '' } });
+
+    const [addMenuBtn, setaddMenuBtn] = useState(false);
 
     useEffect(() => {
+        fetchRestaurants();
+        fetchUserData();
         fetchMenus();
       }, []);
     
       async function fetchMenus() {
-        const apiData = await API.graphql({ query: listAddMenus });
+        const apiData = await API.graphql(graphqlOperation(listAddMenus, {
+            filter: {
+                resid: {
+                    eq: location.state.state.id
+                }
+            }
+        }));
+        console.log("Menu Data ")
+        console.log(apiData)
         setmenus(apiData.data.listAddMenus.items);
       }
-
-      const [userData, setUserData] = useState({ payload: { username: '' } });
-
+    
+      async function fetchRestaurants() {
+        const apiData = await API.graphql(graphqlOperation(getRestaurant, {id: location.state.state.id}));
+        console.log("Restaurant Data ");
+        console.log(apiData);
+        setRestaurants(apiData.data.getRestaurant);
+    }
     const history = useHistory();
-    useEffect(() => {
-        fetchUserData();
-        }, []);
     
       async function fetchUserData() {
         await Auth.currentAuthenticatedUser()
           .then((userSession) => {
             console.log("userData: ", userSession);
             setUserData(userSession.signInUserSession.accessToken);
+            
           })
           .catch((e) => console.log("Not signed in", e));
       }
@@ -46,11 +61,26 @@ export default function Menu() {
             
           } catch(e)
           {
-            console.error('error adding to Menu', e);
+            console.error('error adding to Cart', e);
             // setErrorMessages(e.errors);
           }
       }
-
+    
+    function RenderAddMenuButton()
+    {
+        if(restaurants.username === userData.payload.username)
+        {
+            return(
+                <Button className="btn btn-dark" onClick={() => {
+                    history.push('/addmenu', { state: { id: restaurants.id } })
+                }}>Add Menu</Button>
+            )
+        }
+        return(
+            <></>
+        )
+    }
+    
     return (
         <div>
             <div className="banner">
@@ -59,17 +89,19 @@ export default function Menu() {
             </div>
             <div className='main menu'>
                 <Container>
+                    <div className="header">
                     <h1>Menu</h1>
+                    <RenderAddMenuButton />
+                    </div>
                     <Table striped bordered hover responsive="sm">
                         <tbody>
                             {
                                 menus.map(menus => (
                                 <tr>
-                                    <td>{menus.id}</td>
-                                    <td><Image src={menus.image} alt="Restaurant 1" /></td>
+                                    <td><Image src={'https://d2pmgib90mmdnn.cloudfront.net/public/' + menus.image} alt="Restaurant 1" /></td>
                                     <td>{menus.dishname} <span>{menus.ingredients}</span></td>
                                     <td>$ {menus.price}</td>
-                                    <button onClick={()=>addtoCart(menus.id)} className="btn btn-dark">Add to Cart</button>
+                                    <td><button onClick={()=>addtoCart(menus.id)} className="btn btn-dark">Add to Cart</button></td>
                                     {/* <td><Link to="/cart" className="btn btn-dark" >Add to Cart</Link></td> */}
                                 </tr>
                                 ))
@@ -84,6 +116,7 @@ export default function Menu() {
                     </Row>
                 </Container>
             </div>
+
         </div>
     );
 }
