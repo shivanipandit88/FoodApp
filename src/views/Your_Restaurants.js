@@ -12,6 +12,7 @@ export default function Restaurant() {
     const history = useHistory();
     useEffect(() => {
         fetchUserData();
+        fetchRestaurants();
         }, []);
     
       async function fetchUserData() {
@@ -22,10 +23,6 @@ export default function Restaurant() {
           })
           .catch((e) => console.log("Not signed in", e));
       }
-
-    useEffect(() => {
-        fetchRestaurants();
-      }, []);
     
       async function fetchRestaurants() {
         const apiData = await API.graphql(graphqlOperation(listRestaurants, {
@@ -51,7 +48,7 @@ export default function Restaurant() {
                             <div onClick={() => {
                                 history.push('/menu', { state: { id: restaurants.id } })
                             }}>
-                            <Image src={restaurants.image} alt="Restaurant 1" />
+                            <Image src={'https://d2pmgib90mmdnn.cloudfront.net/public/' + restaurants.image} alt="Restaurant 1" />
                                 <p>{restaurants.name}</p>
                             </div>
                         </Col>

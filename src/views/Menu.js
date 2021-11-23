@@ -3,18 +3,21 @@ import React, { useState, useEffect } from 'react';
 import { useHistory, Link, useLocation } from "react-router-dom";
 import { Container, Row, Col, Table, Image, Button } from "react-bootstrap";
 import food5 from '../assets/food5.jpg';
-import { listAddMenus, listRestaurants } from '../graphql/queries';
+import { getRestaurant, listAddMenus, listRestaurants } from '../graphql/queries';
 import { createCartTable } from '../graphql/mutations';
 
 
 export default function Menu() {
     const location = useLocation();
     const [menus, setmenus] = useState([]);
-    const [restaurants, setRestaurants] = useState([]);
+    const [restaurants, setRestaurants] = useState({
+        username: ""
+    });
     const [userData, setUserData] = useState({ payload: { username: '' } });
 
+    const [addMenuBtn, setaddMenuBtn] = useState(false);
+
     useEffect(() => {
-        fetchMenus();
         fetchRestaurants();
         fetchUserData();
       }, []);
@@ -23,23 +26,21 @@ export default function Menu() {
         const apiData = await API.graphql(graphqlOperation(listAddMenus, {
             filter: {
                 id: {
-                    eq: restaurants.id
-                }
-            }
-        }));
-        setmenus(apiData.data.listAddMenus.items);
-      }
-    
-      async function fetchRestaurants() {
-        const apiData = await API.graphql(graphqlOperation(listRestaurants, {
-            filter: {
-                id: {
                     eq: location.state.state.id
                 }
             }
         }));
+        console.log("Menu Data ")
         console.log(apiData)
-        setRestaurants(apiData.data.listRestaurants.items);
+        setmenus(apiData.data.listAddMenus.items);
+      }
+    
+      async function fetchRestaurants() {
+        const apiData = await API.graphql(graphqlOperation(getRestaurant, {id: location.state.state.id}));
+        console.log("Restaurant Data ");
+        console.log(apiData);
+        setRestaurants(apiData.data.getRestaurant);
+        fetchMenus();
     }
     const history = useHistory();
     
@@ -48,6 +49,7 @@ export default function Menu() {
           .then((userSession) => {
             console.log("userData: ", userSession);
             setUserData(userSession.signInUserSession.accessToken);
+            
           })
           .catch((e) => console.log("Not signed in", e));
       }
@@ -59,11 +61,50 @@ export default function Menu() {
             
           } catch(e)
           {
-            console.error('error adding to Menu', e);
+            console.error('error adding to Cart', e);
             // setErrorMessages(e.errors);
           }
       }
 
+    async function fetchRoles() {
+        console.log("FetchRoles Data");
+        const isReg = () =>{
+            console.log("this is restaurant username",restaurants.username)
+                    console.log("this is username",userData.payload.username)
+            if (restaurants.username === userData.payload.username)
+                {
+                    console.log("this is restaurant username inside",restaurants.username)
+                    console.log("this is username inside",userData.payload.username)
+                    return true;
+                }
+                else return false;
+            }
+        setaddMenuBtn(isReg());
+        } 
+
+    const AddMenuBtn = function(isReg) { return [
+        {
+            title: 'Add Menu',
+            path: '/addmenu',
+            cName: 'btn btn-dark',
+            show: isReg
+        }
+    ]};
+    
+    function RenderAddMenuButton()
+    {
+        if(restaurants.username === userData.payload.username)
+        {
+            return(
+                <Button onClick={() => {
+                    history.push('/addmenu', { state: { id: restaurants.id } })
+                }}>Add Menu</Button>
+            )
+        }
+        return(
+            <></>
+        )
+    }
     return (
         <div>
             <div className="banner">
@@ -72,7 +113,10 @@ export default function Menu() {
             </div>
             <div className='main menu'>
                 <Container>
+                    <div className="header">
                     <h1>Menu</h1>
+                    <RenderAddMenuButton />
+                    </div>
                     <Table striped bordered hover responsive="sm">
                         <tbody>
                             {
@@ -97,6 +141,7 @@ export default function Menu() {
                     </Row>
                 </Container>
             </div>
+
         </div>
     );
 }

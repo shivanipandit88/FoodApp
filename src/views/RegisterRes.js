@@ -74,7 +74,7 @@ export default function CreateRestaurant() {
       console.error('error creating restaurant', e);
       setErrorMessages(e.errors);
     }
-    history.push("/addmenu");
+    history.push("/");
     } else {
       alert("Please select a file to upload.");
     }

@@ -255,6 +255,15 @@ amplify-sign-out{
   color: #000;
 }
 
+.menu .header h1{
+  float: left;
+}
+
+.menu .header .btn{
+  float: right;
+  margin-top: 8px;
+}
+
 .menu table td{
   text-align: left;
   vertical-align: middle;
