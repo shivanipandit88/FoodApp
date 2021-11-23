@@ -4,7 +4,7 @@ import { useHistory, Link, useLocation } from "react-router-dom";
 import { Container, Row, Col, Table, Image, Button } from "react-bootstrap";
 import food5 from '../assets/food5.jpg';
 import { getRestaurant, listAddMenus, listRestaurants } from '../graphql/queries';
-import { createCartTable } from '../graphql/mutations';
+import { createCartData } from '../graphql/mutations';
 
 
 export default function Menu() {
@@ -56,7 +56,8 @@ export default function Menu() {
 
       async function addtoCart(menuID){
         try {
-            await API.graphql(graphqlOperation(createCartTable, {input: { menuItems: menuID, username: userData.payload.username}}));      
+            console.log(menuID)
+            await API.graphql(graphqlOperation(createCartData, {input: { menuID: menuID, username: userData.payload.username}}));      
             alert("Item Added to Cart");
             
           } catch(e)
@@ -111,7 +112,7 @@ export default function Menu() {
                     <Row>
                         <div className="btns">
                             <Link to="/" className="btn btn-dark">Home</Link>
-                            <Link to="/cart" className="btn btn-warning">Go to Cart</Link>
+                            <Link to= {{pathname: "/cart", state: { id: userData } }} className="btn btn-warning">Go to Cart</Link>
                         </div>
                     </Row>
                 </Container>

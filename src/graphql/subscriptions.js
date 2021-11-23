@@ -145,34 +145,94 @@ export const onDeleteOrder = /* GraphQL */ `
     }
   }
 `;
-export const onCreateCartTable = /* GraphQL */ `
-  subscription OnCreateCartTable {
-    onCreateCartTable {
+export const onCreateCartData = /* GraphQL */ `
+  subscription OnCreateCartData {
+    onCreateCartData {
       id
       username
-      menuItems
+      menuID
+      menu {
+        id
+        dishname
+        ingredients
+        image
+        price
+        resid
+        username
+        restaurant {
+          id
+          name
+          description
+          image
+          username
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
   }
 `;
-export const onUpdateCartTable = /* GraphQL */ `
-  subscription OnUpdateCartTable {
-    onUpdateCartTable {
+export const onUpdateCartData = /* GraphQL */ `
+  subscription OnUpdateCartData {
+    onUpdateCartData {
       id
       username
-      menuItems
+      menuID
+      menu {
+        id
+        dishname
+        ingredients
+        image
+        price
+        resid
+        username
+        restaurant {
+          id
+          name
+          description
+          image
+          username
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
   }
 `;
-export const onDeleteCartTable = /* GraphQL */ `
-  subscription OnDeleteCartTable {
-    onDeleteCartTable {
+export const onDeleteCartData = /* GraphQL */ `
+  subscription OnDeleteCartData {
+    onDeleteCartData {
       id
       username
-      menuItems
+      menuID
+      menu {
+        id
+        dishname
+        ingredients
+        image
+        price
+        resid
+        username
+        restaurant {
+          id
+          name
+          description
+          image
+          username
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }

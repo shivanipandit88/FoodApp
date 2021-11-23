@@ -118,28 +118,59 @@ export const listOrders = /* GraphQL */ `
     }
   }
 `;
-export const getCartTable = /* GraphQL */ `
-  query GetCartTable($id: ID!) {
-    getCartTable(id: $id) {
+export const getCartData = /* GraphQL */ `
+  query GetCartData($id: ID!) {
+    getCartData(id: $id) {
       id
       username
-      menuItems
+      menuID
+      menu {
+        id
+        dishname
+        ingredients
+        image
+        price
+        resid
+        username
+        restaurant {
+          id
+          name
+          description
+          image
+          username
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
   }
 `;
-export const listCartTables = /* GraphQL */ `
-  query ListCartTables(
-    $filter: ModelCartTableFilterInput
+export const listCartDatas = /* GraphQL */ `
+  query ListCartDatas(
+    $filter: ModelcartDataFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listCartTables(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listCartDatas(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
         username
-        menuItems
+        menuID
+        menu {
+          id
+          dishname
+          ingredients
+          image
+          price
+          resid
+          username
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }

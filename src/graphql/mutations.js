@@ -172,43 +172,103 @@ export const deleteOrder = /* GraphQL */ `
     }
   }
 `;
-export const createCartTable = /* GraphQL */ `
-  mutation CreateCartTable(
-    $input: CreateCartTableInput!
-    $condition: ModelCartTableConditionInput
+export const createCartData = /* GraphQL */ `
+  mutation CreateCartData(
+    $input: CreateCartDataInput!
+    $condition: ModelcartDataConditionInput
   ) {
-    createCartTable(input: $input, condition: $condition) {
+    createCartData(input: $input, condition: $condition) {
       id
       username
-      menuItems
+      menuID
+      menu {
+        id
+        dishname
+        ingredients
+        image
+        price
+        resid
+        username
+        restaurant {
+          id
+          name
+          description
+          image
+          username
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
   }
 `;
-export const updateCartTable = /* GraphQL */ `
-  mutation UpdateCartTable(
-    $input: UpdateCartTableInput!
-    $condition: ModelCartTableConditionInput
+export const updateCartData = /* GraphQL */ `
+  mutation UpdateCartData(
+    $input: UpdateCartDataInput!
+    $condition: ModelcartDataConditionInput
   ) {
-    updateCartTable(input: $input, condition: $condition) {
+    updateCartData(input: $input, condition: $condition) {
       id
       username
-      menuItems
+      menuID
+      menu {
+        id
+        dishname
+        ingredients
+        image
+        price
+        resid
+        username
+        restaurant {
+          id
+          name
+          description
+          image
+          username
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
   }
 `;
-export const deleteCartTable = /* GraphQL */ `
-  mutation DeleteCartTable(
-    $input: DeleteCartTableInput!
-    $condition: ModelCartTableConditionInput
+export const deleteCartData = /* GraphQL */ `
+  mutation DeleteCartData(
+    $input: DeleteCartDataInput!
+    $condition: ModelcartDataConditionInput
   ) {
-    deleteCartTable(input: $input, condition: $condition) {
+    deleteCartData(input: $input, condition: $condition) {
       id
       username
-      menuItems
+      menuID
+      menu {
+        id
+        dishname
+        ingredients
+        image
+        price
+        resid
+        username
+        restaurant {
+          id
+          name
+          description
+          image
+          username
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
