@@ -81,15 +81,15 @@ export default function CreateAddMenu() {
       console.log(file.current);
       var path = file.current.name;
       try {
-        await API.graphql(graphqlOperation(createAddMenu, {input: { dishname: fields.dishname, ingredients: fields.ingredients, image: fields.image, price: fields.price, resid: location.state.state.id, username: userData.payload.username }}));
+        await API.graphql(graphqlOperation(createAddMenu, {input: { dishname: fields.dishname, ingredients: fields.ingredients, image: path, price: fields.price, resid: location.state.state.id, username: userData.payload.username }}));
         await Storage.put(path, file.current,{ level: "public", }).catch((e) => console.log(e));
 
       setUploaded(true);
-      alert("Restaurant Successfully Registered!");
+      alert("Item Added to Menu!");
       fields.description = "";
     } catch(e)
     {
-      console.error('error creating restaurant', e);
+      console.error('error adding to menu', e);
       setErrorMessages(e.errors);
     }
     history.push("/");

@@ -20,12 +20,13 @@ export default function Menu() {
     useEffect(() => {
         fetchRestaurants();
         fetchUserData();
+        fetchMenus();
       }, []);
     
       async function fetchMenus() {
         const apiData = await API.graphql(graphqlOperation(listAddMenus, {
             filter: {
-                id: {
+                resid: {
                     eq: location.state.state.id
                 }
             }
@@ -40,7 +41,6 @@ export default function Menu() {
         console.log("Restaurant Data ");
         console.log(apiData);
         setRestaurants(apiData.data.getRestaurant);
-        fetchMenus();
     }
     const history = useHistory();
     
@@ -81,22 +81,13 @@ export default function Menu() {
             }
         setaddMenuBtn(isReg());
         } 
-
-    const AddMenuBtn = function(isReg) { return [
-        {
-            title: 'Add Menu',
-            path: '/addmenu',
-            cName: 'btn btn-dark',
-            show: isReg
-        }
-    ]};
     
     function RenderAddMenuButton()
     {
         if(restaurants.username === userData.payload.username)
         {
             return(
-                <Button onClick={() => {
+                <Button className="btn btn-dark" onClick={() => {
                     history.push('/addmenu', { state: { id: restaurants.id } })
                 }}>Add Menu</Button>
             )
@@ -122,11 +113,10 @@ export default function Menu() {
                             {
                                 menus.map(menus => (
                                 <tr>
-                                    <td>{menus.id}</td>
-                                    <td><Image src={menus.image} alt="Restaurant 1" /></td>
+                                    <td><Image src={'https://d2pmgib90mmdnn.cloudfront.net/public/' + menus.image} alt="Restaurant 1" /></td>
                                     <td>{menus.dishname} <span>{menus.ingredients}</span></td>
                                     <td>$ {menus.price}</td>
-                                    <button onClick={()=>addtoCart(menus.id)} className="btn btn-dark">Add to Cart</button>
+                                    <td><button onClick={()=>addtoCart(menus.id)} className="btn btn-dark">Add to Cart</button></td>
                                     {/* <td><Link to="/cart" className="btn btn-dark" >Add to Cart</Link></td> */}
                                 </tr>
                                 ))
