@@ -23,8 +23,9 @@ type Order @model {
   menuItems: String!  
 }
 
-type CartTable @model {
+type cartData @model {
   id: ID!
-  username: String!
-  menuItems: String!  
+  username: String! 
+  menuID: ID! 
+  menu: AddMenu @connection(fields: ["menuID"])
 }

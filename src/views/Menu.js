@@ -85,7 +85,7 @@ export default function Menu() {
         <div>
             <div className="banner">
                 <Image src={food5} alt="Restaurant" />
-                <p>Restaurant Name</p>
+                <p>{restaurants.name}</p>
             </div>
             <div className='main menu'>
                 <Container>
