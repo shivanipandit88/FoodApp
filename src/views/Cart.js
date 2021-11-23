@@ -1,70 +1,60 @@
 import { API, Auth,graphqlOperation } from "aws-amplify";
 import React, { useState, useEffect } from "react";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory, Link, useLocation } from "react-router-dom";
 import { Container, Row, Col, Table, Image, Button } from "react-bootstrap";
 import { listCartDatas } from "../graphql/queries";
+import {deleteCartData } from "../graphql/mutations"
 // import { API, Auth, graphqlOperation } from 'aws-amplify';
 export default function Cart() {
-  const [userData, setUserData] = useState({ payload: { username: '' } });
+  const location = useLocation();
+  const [userData, setUserData] = useState('');
   const [cartItem, setCartItem] = useState([]);
 
   useEffect( () => {
-      fetchUserData();
-      fetchRestaurants();
-      }, [] );
-  
-    async function fetchUserData() {
-      await Auth.currentAuthenticatedUser()
-        .then((userSession) => {
-          console.log("userData132: ", userSession);
-          setUserData(userSession.signInUserSession.accessToken);
-        })
-        .catch((e) => console.log("Not signed in", e));
-        // fetchRestaurants();
+    const fetchCartData = async() =>{
+      // console.log("user",location.state.id.payload.username)
+          await API.graphql(graphqlOperation(listCartDatas,{
+            filter: {
+                username: {
+                    eq : location.state.id.payload.username
+                }
+            }
+          }))
+          .then((apiData) => {
+            setCartItem(apiData.data.listCartDatas.items)
+            console.log(cartItem)
+          })
+          .catch((e) => console.log("No apidata", e));
     }
 
+    
+      fetchCartData();
+      }, [setCartItem] );
   
-    async function fetchRestaurants() {
-      const apiData = await API.graphql(graphqlOperation(listCartDatas,{
-          filter: {
-              username: {
-                  eq : userData.payload.username
-              }
-          }
-      }))
-      console.log('das1',apiData);
-      setCartItem(apiData.data.listCartDatas.items);
+    
 
-      // .then((cartValue) => { 
-      //   // console.log("response",response)
-      //   setCartItem(cartValue.data.listCartDatas.items);
-      //   console.log('cartItem122', cartItem)
-      //   // console.log('test',response.data.listCartDatas.items)
-      // });
-      
+    async function placeOrder() {
+      const map = new Map();
+      console.log("cart1",cartItem)
+
+      cartItem.map(item => {
+        
+        var todoDetails = {
+            id: item.id
+          };
+          console.log("todo",todoDetails)
+         API.graphql({ query: deleteCartData, variables: {input: todoDetails}})
+        
+      })
+      alert('order has been placed');
+      setCartItem([]);
     }
-
-  // async function listCartTable() {
-  //   await API.graphql({ query: listCartTables })
-  //   .then((response)=>{
-  //     response.data.listCartTables.items.filter(Item=>Item.username==userData.payload.username)
-  //     .forEach(
-  //       record => setCartItem(oldArray => [...oldArray, record] )
-  //       );
-  //       console.log("das",cartItem);
-  //   })
-  //   .catch((e) => console.log("failed to fetch cart data", e));
-  // }
-
-  // async function filterCartItems() {
-  //   var filterMenuIDs = cartItem.filter(Item=>Item.username==userData.payload.username);
-  //   console.log("Filtered Items",filterMenuIDs)
-  // }
 
   return (
     <div className="main menu">
       <Container>
-        <h1>Cart</h1>
+        <h1>Cart {userData}</h1>
+        <button onClick={ ()=>placeOrder() } className="btn btn-dark">Place Order</button>
         <Table striped bordered hover responsive="sm">
           <tbody>
             {cartItem &&

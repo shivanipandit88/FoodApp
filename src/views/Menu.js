@@ -112,7 +112,7 @@ export default function Menu() {
                     <Row>
                         <div className="btns">
                             <Link to="/" className="btn btn-dark">Home</Link>
-                            <Link to="/cart" className="btn btn-warning">Go to Cart</Link>
+                            <Link to= {{pathname: "/cart", state: { id: userData } }} className="btn btn-warning">Go to Cart</Link>
                         </div>
                     </Row>
                 </Container>
