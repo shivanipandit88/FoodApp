@@ -13,8 +13,8 @@ type AddMenu @model {
   image: String
   price: Int!
   resid: ID!
-  username: String!
-  restaurant: Restaurant @connection(fields: ["resid"])
+  res  username: String!
+taurant: Restaurant @connection(fields: ["resid"])
 }
 
 type Order @model {
@@ -23,8 +23,9 @@ type Order @model {
   menuItems: String!  
 }
 
-type CartTable @model {
+type cartData @model {
   id: ID!
-  username: String!
-  menuItems: String!  
+  username: String! 
+  menuID: ID! 
+  menu: AddMenu @connection(fields: ["menuID"])
 }
