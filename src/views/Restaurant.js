@@ -21,7 +21,7 @@ export default function Restaurant() {
     return (
         <div className='main restaurant'>
             <Container>
-                <h1>Your Restaurants</h1>
+                <h1>Restaurants</h1>
                 <div>
                     <Row className="align-items-center">
                     {
