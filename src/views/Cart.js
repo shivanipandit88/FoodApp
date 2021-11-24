@@ -60,15 +60,6 @@ export default function Cart() {
     <div className="main menu">
       <Container>
         <h1>Cart {userData}</h1>
-        <button
-          onClick={() => {
-            placeOrder();
-            routeChange();
-          }}
-          className="btn btn-dark"
-        >
-          Place Order
-        </button>
         <Table striped bordered hover responsive="sm">
           <tbody>
             {cartItem &&
@@ -86,6 +77,22 @@ export default function Cart() {
             </tr>
           </tbody>
         </Table>
+        <Row>
+            <div className="btns">
+                <Link to="/" className="btn btn-dark">
+                    Home
+                </Link>
+                <button
+                    onClick={() => {
+                        placeOrder();
+                        routeChange();
+                    }}
+                    className="btn btn-warning"
+                    >
+                    Place Order
+                </button>
+            </div>
+          </Row>
       </Container>
     </div>
   );
