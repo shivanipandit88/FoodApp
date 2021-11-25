@@ -33,13 +33,23 @@
 
   ## Sample Demo Screenshots
   
-  1. Home Page
-  2. Registration Page
-  3. Login Page
-  4. Register Restaurant Page
-  5. Restaurant Menu Page
-  6. Add Menu Page
-  7. Order Cart Page
+  1. Home Page 
+     
+     ![Create Account](https://github.com/shivanipandit88/FoodApp/blob/main/Screenshots/Create%20Account.PNG?raw=true)
+
+  3. Registration Page
+    
+      ![Create Account](https://github.com/shivanipandit88/FoodApp/blob/main/Screenshots/Create%20Account.PNG?raw=true)   
+
+  5. Login Page
+
+     ![Create Account](https://github.com/shivanipandit88/FoodApp/blob/main/Screenshots/Create%20Account.PNG?raw=true)
+  7. Register Restaurant Page
+
+     ![Create Account](https://github.com/shivanipandit88/FoodApp/blob/main/Screenshots/Create%20Account.PNG?raw=true)
+  9. Restaurant Menu Page
+  10. Add Menu Page
+  11. Order Cart Page
     
   
 - List of required software to download locally:
