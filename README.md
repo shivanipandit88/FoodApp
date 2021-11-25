@@ -72,6 +72,37 @@ Password: user1234
 ## URL to GitHub :
 https://github.com/shivanipandit88/FoodApp
     
+## Pre-requisites
+```
+Install npm
+Install and configure amplify CLI
+Clone this git repo using amplify
+Project Set-up
+amplify init --app https://github.com/shivanipandit88/FoodApp will initialize locally.
+
+amplify push will then create the following resources in the AWS cloud:
+
+S3 buckets (hosting the frontend + for prescription upload/download)
+AppSync (for GraphQL API between frontend and database)
+Cloudfront distribution (for frontend distribution)
+DynamoDB (for database storage)
+Lambda (for authorization of the user at the time of signup)
+```
+
+## Local configuration
+How to set up and run project locally:
+```
+git clone https://github.com/shivanipandit88/FoodApp
+cd FoodApp
+npm init
+npm start
+The local Host should run on http://localhost:3000 
+```
+
+## Architecture Diagram:
+    
+    ![Create Account](https://github.com/shivanipandit88/FoodApp/blob/main/Screenshots/CLoudProject2_architechture.drawio.png)
+    
     
 ## Individual contribution breakdown :
 
