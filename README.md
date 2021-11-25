@@ -41,7 +41,6 @@
   ```
   2. Registration Page
   ``` 
-  
       ![Registration Page](https://github.com/shivanipandit88/FoodApp/blob/main/Screenshots/Create%20Account.PNG?raw=true) 
  
   ```
