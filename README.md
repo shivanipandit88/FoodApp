@@ -9,7 +9,6 @@
     - [Satish Kathiriya](https://www.linkedin.com/in/satishkathiriya/)
     - [Supreetha M A](https://www.linkedin.com/in/supreetha-m-a-a18340103/)
 
-## Project Introduction ##
   
     ## Problem Statement:
     The Fassos is a whole new way to order take-out, that delivers fresh homemade food made by your neighbor, to your door. 
