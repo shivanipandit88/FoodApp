@@ -10,7 +10,8 @@
     - [Supreetha M A](https://www.linkedin.com/in/supreetha-m-a-a18340103/)
     
   
-# Project Introduction:
+# Project Introduction
+
     ## Problem Statement:
     The Fassos is a whole new way to order take-out, that delivers fresh homemade food made by your neighbor, to your door. 
 
@@ -21,16 +22,17 @@
      Having it’s ground in AWS it is a highly scalable and responsive application.
 
     ## Features of our Project:
+    ```
     Food Ordering:
     Customer will register in app
     Customer can select from a range of restaurants.
     Add items to the cart
     Checkout and place the order.
-
     Restaurant registration:
     Restaurant Description
     Upload Image to represent restaurant
     Menu upload
+    ```
 
   ## Sample Demo Screenshots
   
