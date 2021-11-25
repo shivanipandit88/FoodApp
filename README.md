@@ -49,6 +49,7 @@
 - How to set up and run project locally?
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). And setup by following the [AWS amplify setup doc](https://docs.amplify.aws/start/q/integration/react/)
+Simply run the npm run start --script to start the project after initialising the Amplify configuration locally.
 
 ### Available Scripts
 
