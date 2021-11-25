@@ -33,30 +33,34 @@
 
   ## Sample Demo Screenshots
   
+  ```
   1. Home Page 
-     
+  ```   
      ![Create Account](https://github.com/shivanipandit88/FoodApp/blob/main/Screenshots/HomePage1.PNG?raw=true)  
   
+  ```
   2. Registration Page
-    
+  ``` 
       ![Registration Page](https://github.com/shivanipandit88/FoodApp/blob/main/Screenshots/Create%20Account.PNG?raw=true) 
-              
+  
+  ```
   3. Login Page
-
+  ```
      ![Create Account](https://github.com/shivanipandit88/FoodApp/blob/main/Screenshots/Login%20Page.PNG?raw=true)
          
-     
+  ```   
   4. Register Restaurant Page
-
+  ```
      ![Create Account](https://github.com/shivanipandit88/FoodApp/blob/main/Screenshots/Create%20Restaurant.PNG?raw=true)
      
-     
+  ```   
   5. Restaurant Menu Page
-
+  ```
     ![Create Account](https://github.com/shivanipandit88/FoodApp/blob/main/Screenshots/MenuPage.PNG)
-    
+  
+  ```
   6. Order Cart Page
-
+  ```
     ![Create Account](https://github.com/shivanipandit88/FoodApp/blob/main/Screenshots/CartItem.PNG)
     
   
