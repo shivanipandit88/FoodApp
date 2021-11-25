@@ -59,6 +59,9 @@
   
     ![Create Account](https://github.com/shivanipandit88/FoodApp/blob/main/Screenshots/CartItem.PNG)
     
+    ## Architecture Diagram:
+  
+    ![Create Account](https://github.com/shivanipandit88/FoodApp/blob/main/Screenshots/CLoudProject2_architechture.drawio.png)
     
 ## Solution for each requirement present in the problem statement.
 As a solution to the problem statement we mention above, we have developed Fassos App where the customers can register and order fresh homemade food from the registered restaurants (can be an individual/group). 
