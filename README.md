@@ -37,12 +37,13 @@
   1. Home Page 
   ```   
      ![Create Account](https://github.com/shivanipandit88/FoodApp/blob/main/Screenshots/HomePage1.PNG?raw=true)  
-  
+
   ```
   2. Registration Page
   ``` 
-      ![Registration Page](https://github.com/shivanipandit88/FoodApp/blob/main/Screenshots/Create%20Account.PNG?raw=true) 
   
+      ![Registration Page](https://github.com/shivanipandit88/FoodApp/blob/main/Screenshots/Create%20Account.PNG?raw=true) 
+ 
   ```
   3. Login Page
   ```
