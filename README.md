@@ -58,11 +58,6 @@
   
     ![Create Account](https://github.com/shivanipandit88/FoodApp/blob/main/Screenshots/CartItem.PNG)
     
-  
-- List of required software to download locally:
-    
-    Node 
-    AWS Amplify
     
 ## Solution for each requirement present in the problem statement.
 As a solution to the problem statement we mention above, we have developed Fassos App where the customers can register and order fresh homemade food from the registered restaurants (can be an individual/group). 
@@ -80,6 +75,7 @@ https://github.com/shivanipandit88/FoodApp
 ## Individual contribution breakdown :
 
 ## Shivani Pandit : 
+```
 Step 1: Start with getting introduced with AWS Amplify. Set up the Amplify CLI on my local system with an AWS IAM user and deployed a basic React Application
 Step 2: Set up Git repository with Amplify CI/CD
 Step 3: Implemented Cognito for User Registration and Login with  verification code sent to their email address. 
@@ -91,27 +87,33 @@ Step 8: Add Menu Option for the newly registered restaurants.
 Step 9: Populate the Menu page when a user selects a restaurant.
 Step 10: Provided the Amplify setup to my teammates and allocated the remaining modules for them to work on.
 Step 11: Documentation, Updating Readme.md
+```
 
-## Chirag Rajpal : 
+## Chirag Rajpal :
+```
 Started with getting introduced to AWS Amplify, React and Node.js
 Made a setup of Amplify with the existing React App configuration.
 S3 image storage Worked on application to understand how to fetch the images from S3 bucket using Amplify by enabling the S3 policies and fetch the same to the Application.
 Worked on Cart Module to pass the Menu items from MenuID table to Cart Table.
 Tested the application for functionality testing.
 Created Architecture diagram, Documentation and PPT
+```
 
-## Satish Kathiriya :  
+## Satish Kathiriya : 
+```
 Start with getting introduced with AWS Amplify, React and node.
 Setup Amplify with existing React App
 Worked on Cart Module - Created the tables and api endpoints for the cart page and integrated it with frontend UI.
 Tested the application: Integration testing
 Created Architecture diagram, Documentation and PPT
+```
 
 ## Supreetha M A : 
+```
 Requirement analysis for the UI wireframes
 Testing the application
 Documentation and PPT
-    
+```   
     
 ## How to set up and run project locally?
 
