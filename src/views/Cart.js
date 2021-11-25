@@ -9,9 +9,10 @@ export default function Cart() {
   const location = useLocation();
   const [userData, setUserData] = useState("");
   const [cartItem, setCartItem] = useState([]);
+  const [price, setPrice] = useState(); 
 
   const history = useHistory();
-
+  var totalPrice = 0;
   useEffect(() => {
     const fetchCartData = async () => {
       // console.log("user",location.state.id.payload.username)
@@ -27,12 +28,19 @@ export default function Cart() {
         .then((apiData) => {
           setCartItem(apiData.data.listCartDatas.items);
           console.log(cartItem);
+          
+          cartItem.map((item) => {
+            console.log("item", item.menu.price);
+            totalPrice = totalPrice + item.menu.price;
+          });
+          console.log("price2",totalPrice)
+          setPrice(totalPrice);
         })
         .catch((e) => console.log("No apidata", e));
     };
 
     fetchCartData();
-  }, [setCartItem]);
+  }, [cartItem, price]);
 
   async function placeOrder() {
     const map = new Map();
@@ -72,8 +80,9 @@ export default function Cart() {
               ))}
 
             <tr>
-              <td colSpan="2">Total</td>
-              <td>totalPrice</td>
+              <td colSpan="1">Total</td>
+              <td align="right">totalPrice</td>
+              <td>$ {price}</td>
             </tr>
           </tbody>
         </Table>
