@@ -64,7 +64,56 @@
     Node 
     AWS Amplify
     
-- How to set up and run project locally?
+## Solution for each requirement present in the problem statement.
+As a solution to the problem statement we mention above, we have developed Fassos App where the customers can register and order fresh homemade food from the registered restaurants (can be an individual/group). 
+
+## Public URL to the application:
+https://main.d30i7ibo5hjmbm.amplifyapp.com/
+Test account credentials:
+Username: shivanipandit88
+Password: user1234
+
+## URL to GitHub :
+https://github.com/shivanipandit88/FoodApp
+    
+    
+## Individual contribution breakdown :
+
+## Shivani Pandit : 
+Step 1: Start with getting introduced with AWS Amplify. Set up the Amplify CLI on my local system with an AWS IAM user and deployed a basic React Application
+Step 2: Set up Git repository with Amplify CI/CD
+Step 3: Implemented Cognito for User Registration and Login with  verification code sent to their email address. 
+Step 4: Started working on the UI in React using Bootstrap, HTML and CSS
+Step 5: Added APIs to Amplify and generate database tables in AWS DynamoDB. Using those APIs connected the UI to the backend
+Step 6: Initially started with Registering a Restaurant to deliver food. 
+Step 7: Populate the Restaurant Table on the homepage for the user to view the options to choose from.
+Step 8: Add Menu Option for the newly registered restaurants.
+Step 9: Populate the Menu page when a user selects a restaurant.
+Step 10: Provided the Amplify setup to my teammates and allocated the remaining modules for them to work on.
+Step 11: Documentation, Updating Readme.md
+
+## Chirag Rajpal : 
+Started with getting introduced to AWS Amplify, React and Node.js
+Made a setup of Amplify with the existing React App configuration.
+S3 image storage Worked on application to understand how to fetch the images from S3 bucket using Amplify by enabling the S3 policies and fetch the same to the Application.
+Worked on Cart Module to pass the Menu items from MenuID table to Cart Table.
+Tested the application for functionality testing.
+Created Architecture diagram, Documentation and PPT
+
+## Satish Kathiriya :  
+Start with getting introduced with AWS Amplify, React and node.
+Setup Amplify with existing React App
+Worked on Cart Module - Created the tables and api endpoints for the cart page and integrated it with frontend UI.
+Tested the application: Integration testing
+Created Architecture diagram, Documentation and PPT
+
+## Supreetha M A : 
+Requirement analysis for the UI wireframes
+Testing the application
+Documentation and PPT
+    
+    
+## How to set up and run project locally?
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). And setup by following the [AWS amplify setup doc](https://docs.amplify.aws/start/q/integration/react/)
 Simply run the npm run start --script to start the project after initialising the Amplify configuration locally.
