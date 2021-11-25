@@ -162,7 +162,7 @@ a.menu-bars:hover{
   height: 60px;
 }
 
-.nav-text a {
+.nav-text a, .nav-text div {
   text-decoration: none;
   color: white;
   font-size: 18px;
@@ -175,9 +175,10 @@ a.menu-bars:hover{
   border-radius: 4px;
 }
 
-.nav-text a:hover {
+.nav-text a:hover, .nav-text div:hover {
   background-color: #ffffff;
   color: #000;
+  cursor: pointer;
 }
 
 .nav-menu-items {

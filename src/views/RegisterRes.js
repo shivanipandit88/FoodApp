@@ -5,12 +5,14 @@ import { Container, Row, Col, Form, Image, Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { useFormFields } from "../lib/hooksLib";
 import { createRestaurant } from '../graphql/mutations';
+import { listRestaurants } from '../graphql/queries';
 
 export default function CreateRestaurant() {
 
   const file = useRef(null);
   const [uploaded, setUploaded] = useState(false);
   const MAX_ATTACHMENT_SIZE = 10000000;
+  const [restaurants, setRestaurants] = useState([]);
 
   function handleFileChange(event)
   {
@@ -21,6 +23,7 @@ export default function CreateRestaurant() {
   //User Informantion
   useEffect(() => {
     fetchUserData();
+    fetchRestaurants();
     }, []);
 
   async function fetchUserData() {
@@ -40,6 +43,12 @@ export default function CreateRestaurant() {
   });
   const history = useHistory();
 
+  async function fetchRestaurants() {
+    const apiData = await API.graphql({ query: listRestaurants });
+    console.log(apiData);
+    setRestaurants(apiData.data.listRestaurants.items);
+  }
+
   function validateForm() {
     try {
       return (
@@ -53,30 +62,41 @@ export default function CreateRestaurant() {
 
   async function regForm(event) {
     event.preventDefault();
-    
-    if (file.current && file.current.size > MAX_ATTACHMENT_SIZE) {
-      alert(
-        `Please pick a file smaller than ${MAX_ATTACHMENT_SIZE / 1000000} MB.`
-      );
-      return;
-    } else if (file.current) {
-      console.log(file.current);
-      var path = file.current.name;
-      try {
-      await API.graphql(graphqlOperation(createRestaurant, {input: { name: fields.name, description: fields.description, image: path, username: userData.payload.username }}));
-      await Storage.put(path, file.current,{ level: "public", }).catch((e) => console.log(e));
 
-      setUploaded(true);
-      alert("Restaurant Successfully Registered!");
-      fields.description = "";
-    } catch(e)
-    {
-      console.error('error creating restaurant', e);
-      setErrorMessages(e.errors);
+    var reg = 0;
+    for (let i = 0; i < restaurants.length; i++) {
+      if(restaurants[i].name === fields.name){
+        reg += 1;
+      }
     }
-    history.push("/");
-    } else {
-      alert("Please select a file to upload.");
+
+    if (reg > 0) {
+      alert("You've already registered this Restaurant!!");
+    }else {
+      if (file.current && file.current.size > MAX_ATTACHMENT_SIZE) {
+        alert(
+          `Please pick a file smaller than ${MAX_ATTACHMENT_SIZE / 1000000} MB.`
+        );
+        return;
+      } else if (file.current) {
+        console.log(file.current);
+        var path = file.current.name;
+        try {
+        await API.graphql(graphqlOperation(createRestaurant, {input: { name: fields.name, description: fields.description, image: path, username: userData.payload.username }}));
+        await Storage.put(path, file.current,{ level: "public", }).catch((e) => console.log(e));
+
+        setUploaded(true);
+        alert("Restaurant Successfully Registered!");
+        fields.description = "";
+      } catch(e)
+      {
+        console.error('error creating restaurant', e);
+        setErrorMessages(e.errors);
+      }
+      history.push("/");
+      } else {
+        alert("Please select a file to upload.");
+      }
     }
   }
 

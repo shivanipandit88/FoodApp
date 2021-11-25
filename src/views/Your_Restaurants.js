@@ -1,11 +1,12 @@
 import { API, Auth, graphqlOperation } from 'aws-amplify';
 import React, { useState, useEffect } from 'react';
-import { useHistory, Link } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { Container, Row, Col, Image } from "react-bootstrap";
 import { listRestaurants } from '../graphql/queries';
 
 export default function Restaurant() {
 
+    const location = useLocation();
     const [restaurants, setRestaurants] = useState([]);
     const [userData, setUserData] = useState({ payload: { username: '' } });
 
@@ -28,10 +29,12 @@ export default function Restaurant() {
         const apiData = await API.graphql(graphqlOperation(listRestaurants, {
             filter: {
                 username: {
-                    eq: userData.payload.username
+                    eq: location.state.state.user
                 }
             }
         }));
+        console.log("Username");
+        console.log(location.state.state.user);
         console.log(apiData)
         setRestaurants(apiData.data.listRestaurants.items);
       }
@@ -45,7 +48,7 @@ export default function Restaurant() {
                     {
                         restaurants.map(restaurants => (
                         <Col md={4} sm={6} xs={12} style={{ fontSize: "18px" }} key={restaurants.id}>
-                            <div onClick={() => {
+                            <div className="indiRes" onClick={() => {
                                 history.push('/menu', { state: { id: restaurants.id } })
                             }}>
                             <Image src={'https://d2pmgib90mmdnn.cloudfront.net/public/' + restaurants.image} alt="Restaurant 1" />
