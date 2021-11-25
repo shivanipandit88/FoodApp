@@ -43,9 +43,10 @@
     
   
 - List of required software to download locally:
+    
     Node 
     AWS Amplify
-- Local configuration
+    
 - How to set up and run project locally?
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). And setup by following the [AWS amplify setup doc](https://docs.amplify.aws/start/q/integration/react/)
