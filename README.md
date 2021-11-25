@@ -8,11 +8,41 @@
     - [Chirag Rajpal](https://www.linkedin.com/in/chirag-rajpal/)
     - [Satish Kathiriya](https://www.linkedin.com/in/satishkathiriya/)
     - [Supreetha M A](https://www.linkedin.com/in/supreetha-m-a-a18340103/)
-- Project Introduction (What the application does, feature list)
-- Sample Demo Screenshots
-- Pre-requisites Set Up
-- Here include bullet point list of resources one need to configure in their cloud account. (E.g. For AWS: S3 buckets, CloudFront etc)
-- List of required software to download locally (E.g. Spring, JDK, Eclipse IDE etc. )
+    
+- Project Introduction:
+    ## Problem Statement:
+    The Fassos is a whole new way to order take-out, that delivers fresh homemade food made by your neighbor, to your door. 
+
+    Discover local home-based cooks in your community, browse their unique menus, and let them handle the cooking for you!
+    
+    ## Solution the our Project Provides:
+     Faasos is a food app, which provides a user-friendly interface to order home made food.
+     Having it’s ground in AWS it is a highly scalable and responsive application.
+
+    ## Features of our Project:
+    Food Ordering:
+    Customer will register in app
+    Customer can select from a range of restaurants.
+    Add items to the cart
+    Checkout and place the order.
+
+    Restaurant registration:
+    Restaurant Description
+    Upload Image to represent restaurant
+    Menu upload
+
+  ## Sample Demo Screenshots
+  
+  1. Home Page
+  2. Registration Page
+  3. Login Page
+  4. Register Restaurant Page
+  5. Restaurant Menu Page
+  6. Add Menu Page
+  7. Order Cart Page
+    
+  
+- List of required software to download locally:
     Node 
     AWS Amplify
 - Local configuration
