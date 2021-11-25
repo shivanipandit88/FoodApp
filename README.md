@@ -99,7 +99,7 @@ npm start
 The local Host should run on http://localhost:3000 
 ```
 
-## Architecture Diagram:
+ **Architecture Diagram**
     
     ![Create Account](https://github.com/shivanipandit88/FoodApp/blob/main/Screenshots/CLoudProject2_architechture.drawio.png)
    
