@@ -13,8 +13,11 @@ export default function Restaurant() {
     const history = useHistory();
     useEffect(() => {
         fetchUserData();
-        fetchRestaurants();
         }, []);
+
+        useEffect(() => {
+            fetchRestaurants();
+        }, [userData]);
     
       async function fetchUserData() {
         await Auth.currentAuthenticatedUser()
@@ -29,12 +32,11 @@ export default function Restaurant() {
         const apiData = await API.graphql(graphqlOperation(listRestaurants, {
             filter: {
                 username: {
-                    eq: location.state.state.user
+                    eq: userData.payload.username
                 }
             }
         }));
         console.log("Username");
-        console.log(location.state.state.user);
         console.log(apiData)
         setRestaurants(apiData.data.listRestaurants.items);
       }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { AmplifySignOut } from '@aws-amplify/ui-react';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
@@ -8,7 +8,6 @@ import { API, Auth, graphqlOperation } from 'aws-amplify';
 
 const SideNav = (props) => {
 
-    const history = useHistory();
     const [restaurants, setRestaurants] = useState([]);
     const [userData, setUserData] = useState({ payload: { username: '' } });
 
@@ -70,14 +69,9 @@ const SideNav = (props) => {
         {
             return(
                 <li className='nav-text'>
-                    {/* <Link to='/yourrestaurants'>
+                    <Link to='/yourrestaurants'>
                         <FaIcons.FaUtensils /><span>Your Restaurants</span>
-                    </Link> */}
-                    <div
-                        onClick={() => {
-                            history.push("/yourrestaurants", { state: { user: userData.payload.username } });
-                        }}
-                    ><FaIcons.FaUtensils /><span>Your Restaurants</span></div>
+                    </Link>
                 </li>
             )
         }
