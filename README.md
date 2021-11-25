@@ -53,11 +53,11 @@
      
   5. Restaurant Menu Page
 
-    https://github.com/shivanipandit88/FoodApp/blob/main/Screenshots/MenuPage.PNG
+    ![Create Account](https://github.com/shivanipandit88/FoodApp/blob/main/Screenshots/MenuPage.PNG)
     
   6. Order Cart Page
 
-    https://github.com/shivanipandit88/FoodApp/blob/main/Screenshots/CartItem.PNG
+    ![Create Account](https://github.com/shivanipandit88/FoodApp/blob/main/Screenshots/CartItem.PNG)
     
   
 - List of required software to download locally:
