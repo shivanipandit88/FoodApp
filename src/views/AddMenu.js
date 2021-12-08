@@ -132,7 +132,7 @@ export default function CreateAddMenu() {
             />
         </Form.Group>
           <Button block type="submit" disabled={!validateForm()} variant="warning">
-            Register
+            Add
           </Button>
         </Form>
       </div>
@@ -145,27 +145,6 @@ export default function CreateAddMenu() {
         <Container>
             <h1>Add your Menu</h1> 
             {renderForm()} 
-        </Container>
-    </div>
-    <div className='main restaurant'>
-        <Container>
-            <h1>Your Restaurants</h1>
-            <div>
-                <Row className="align-items-center">
-                {
-                    restaurants.map(restaurants => (
-                    <Col md={4} sm={6} xs={12} style={{ fontSize: "18px" }} key={restaurants.id}>
-                        <div className="indiRes" onClick={() => {
-                            history.push('/menu', { state: { id: restaurants.id } })
-                        }}>
-                        <Image src={'https://d2pmgib90mmdnn.cloudfront.net/public/' + restaurants.image} alt="Restaurant 1" />
-                            <p>{restaurants.name}</p>
-                        </div>
-                    </Col>
-                    ))
-                }
-                </Row>
-            </div>
         </Container>
     </div>
 </>);

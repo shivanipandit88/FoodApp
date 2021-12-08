@@ -162,7 +162,7 @@ a.menu-bars:hover{
   height: 60px;
 }
 
-.nav-text a {
+.nav-text a, .nav-text div {
   text-decoration: none;
   color: white;
   font-size: 18px;
@@ -175,9 +175,10 @@ a.menu-bars:hover{
   border-radius: 4px;
 }
 
-.nav-text a:hover {
+.nav-text a:hover, .nav-text div:hover {
   background-color: #ffffff;
   color: #000;
+  cursor: pointer;
 }
 
 .nav-menu-items {
@@ -233,7 +234,7 @@ amplify-sign-out{
 
 .restaurant .indiRes img{
   width: 100%;
-  max-height: 400px;
+  max-height: 500px;
   margin-bottom: 15px;
   height: 100vh;
 }
@@ -293,6 +294,16 @@ amplify-sign-out{
 
 .menu .btns .btn.btn-dark{
   float: left;
+}
+
+.menu .btns .floatR{
+  float: right;
+}
+
+.menu .btns .floatR span{
+  display: inline-block;
+  margin-right: 20px;
+  line-height: 38px;
 }
 
 .regForm .form-group{

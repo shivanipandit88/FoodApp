@@ -70,7 +70,7 @@ export default function Menu() {
           input: { menuID: menuID, username: userData.payload.username },
         })
       );
-      alert("Item Added to Cart");
+    //   alert("Item Added to Cart");
     } catch (e) {
       console.error("error adding to Cart", e);
       // setErrorMessages(e.errors);
@@ -143,13 +143,15 @@ export default function Menu() {
               <Link to="/" className="btn btn-dark">
                 Home
               </Link>
-              <div>Items to checkout: {cartCount}</div>
-              <Link
-                to={{ pathname: "/cart", state: { id: userData } }}
-                className="btn btn-warning"
-              >
-                Go to Cart {cartCount}
-              </Link>
+              <div className="floatR">
+                  <span>Items to checkout: {cartCount}</span>
+                  <Link
+                    to={{ pathname: "/cart", state: { id: userData } }}
+                    className="btn btn-warning"
+                  >
+                    Go to Cart
+                </Link>
+              </div>
             </div>
           </Row>
         </Container>
