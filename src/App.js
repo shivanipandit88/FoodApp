@@ -14,8 +14,7 @@ import AddMenu from './views/AddMenu';
 import Your_Restaurants from './views/Your_Restaurants';
 Amplify.configure(awsconfig);
 
-function App() {
-
+function App() { 
   const listener = (data) => {
     switch (data.payload.event) {
       case 'signIn':

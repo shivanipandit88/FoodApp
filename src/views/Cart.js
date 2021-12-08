@@ -4,7 +4,7 @@ import { useHistory, Link, useLocation } from "react-router-dom";
 import { Container, Row, Col, Table, Image, Button } from "react-bootstrap";
 import { listCartDatas } from "../graphql/queries";
 import { deleteCartData } from "../graphql/mutations";
-// import { API, Auth, graphqlOperation } from 'aws-amplify';
+
 export default function Cart() {
   const location = useLocation();
   const [userData, setUserData] = useState("");
@@ -14,7 +14,7 @@ export default function Cart() {
 
   useEffect(() => {
     const fetchCartData = async () => {
-      // console.log("user",location.state.id.payload.username)
+      console.log("user",location.state.id.payload.username)
       await API.graphql(
         graphqlOperation(listCartDatas, {
           filter: {
@@ -51,7 +51,7 @@ export default function Cart() {
 
   function routeChange(){ 
     let path = `/#`; 
-    console.log("route CHange called")
+    console.log("route Change called")
     history.push(path);
   }
 

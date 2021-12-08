@@ -13,9 +13,7 @@ import { createCartData } from "../graphql/mutations";
 export default function Menu() {
   const location = useLocation();
   const [menus, setmenus] = useState([]);
-  const [restaurants, setRestaurants] = useState({
-    username: "",
-  });
+  const [restaurants, setRestaurants] = useState({ username: "",});
   const [userData, setUserData] = useState({ payload: { username: "" } });
   const [addMenuBtn, setaddMenuBtn] = useState(false);
   const [cartCount, setCartCount] = useState(0);
@@ -24,11 +22,13 @@ export default function Menu() {
     fetchRestaurants();
     fetchUserData();
     fetchMenus();
+    
   }, []);
 
   useEffect(() => {}, [cartCount]);
 
   async function fetchMenus() {
+    console.log("Location being Passed for List Add Menus and getting restaurant",location);
     const apiData = await API.graphql(
       graphqlOperation(listAddMenus, {
         filter: {
@@ -38,7 +38,7 @@ export default function Menu() {
         },
       })
     );
-    console.log("Menu Data ");
+    console.log("Menu Data");
     console.log(apiData);
     setmenus(apiData.data.listAddMenus.items);
   }
@@ -47,7 +47,7 @@ export default function Menu() {
     const apiData = await API.graphql(
       graphqlOperation(getRestaurant, { id: location.state.state.id })
     );
-    console.log("Restaurant Data ");
+    console.log("Restaurant Data");
     console.log(apiData);
     setRestaurants(apiData.data.getRestaurant);
   }
